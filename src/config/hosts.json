@@ -1,0 +1,14 @@
+{
+  "test": {
+    "host": "gin.xing99.cc",
+    "prefix": "api"
+  },
+  "rc": {
+    "host": "",
+    "prefix": "api"
+  },
+  "stable": {
+    "host": "",
+    "prefix": "api"
+  }
+}
