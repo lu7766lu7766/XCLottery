@@ -5,8 +5,8 @@
       <!-- begin brand -->
       <div class="login-header">
         <div class="brand">
-          <span class="logo"></span> <b>GIN 管理系统</b>
-          <small>Manage System</small>
+          <span class="logo"></span> <b>彩票开奖网管理系统</b>
+          <small>LotteryDraw System</small>
         </div>
         <div class="icon">
           <i class="fa fa-lock"></i>
