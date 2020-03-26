@@ -1,11 +1,11 @@
 import BaseRequest from 'lib/Request/BaseRequest'
 import _config from './config'
 
-export default class User extends BaseRequest
+export default class Request extends BaseRequest
 {
   get baseUrls()
   {
-    return super.baseUrls.concat('role')
+    return super.baseUrls.concat('/account/manage')
   }
 
   constructor()
@@ -24,6 +24,11 @@ export default class User extends BaseRequest
     return await this.request('total', data, options)
   }
 
+  async getOptions(data, options)
+  {
+    return await this.request('options', data, options)
+  }
+
   async doCreate(data, options)
   {
     return await this.request('create', data, options)
@@ -37,20 +42,5 @@ export default class User extends BaseRequest
   async doDelete(data, options)
   {
     return await this.request('delete', data, options)
-  }
-
-  async getAllNodes(data, options)
-  {
-    return await this.request('nodes', data, options)
-  }
-
-  async getOwnNodes(data, options)
-  {
-    return await this.request('own', data, options)
-  }
-
-  async doBind(data, options)
-  {
-    return await this.request('bind', data, options)
   }
 }

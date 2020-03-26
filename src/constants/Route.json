@@ -1,15 +1,5 @@
 {
-  "role-manage": "ROLE_MG",
-  "account-manage": "ACCOUNT_MG",
-  "company-account": "COMPANY_ACCOUNT",
-  "manager-account": "MANAGER_ACCOUNT",
-  "employee-account": "EMPLOYEE_ACCOUNT",
-  "company-setting": "COMPANY_SETTING",
-  "currency-setting": "CURRENCY_SETTING",
-  "exchange-setting": "EXCHANGE_SETTING",
-  "exchange-rate-setting": "EXCHANGE_RATE_SETTING",
-  "account-setting": "ACCOUNT_SETTING",
-  "order-apply": "ORDER_APPLY",
-  "order-verify": "ORDER_VERIFY",
-  "account-login-history": "ACCOUNT_LOGIN_HISTORY"
+	"role-manage": "ROLE_MG",
+	"account-manage": "ACCOUNT_MG",
+	"account-login-history": "ACCOUNT_LOGIN_HISTORY"
 }

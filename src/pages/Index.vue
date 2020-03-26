@@ -8,7 +8,7 @@
         <router-link :to="{
   							name: 'welcome'
   						}" class="navbar-brand">
-          <span class="navbar-logo"></span> <b>GIN</b>
+          <span class="navbar-logo"></span> <b>抖影管理系统</b>
         </router-link>
         <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
           <span class="icon-bar"></span>
@@ -64,119 +64,9 @@
             </a>
           </li>
         </ul>
-        <!-- end sidebar user -->
-        <!-- begin sidebar nav -->
-        <ul class="nav">
-          <li class="has-sub" v-if="hasMenu(Menu.ROLE_MG, Menu.ACCOUNT_MG)">
-            <a href="javascript:;">
-              <b class="caret"></b>
-              <i class="fas fa-cog"></i>
-              <span>系统设置</span>
-            </a>
-            <ul class="sub-menu">
-              <li v-if="hasMenu(Menu.ROLE_MG)">
-                <router-link :to="{name: 'role-manage'}">角色管理</router-link>
-              </li>
-              <li v-if="hasMenu(Menu.ACCOUNT_MG)">
-                <router-link :to="{name: 'account-manage'}">帐号管理</router-link>
-              </li>
-            </ul>
-          </li>
-
-          <li class="has-sub" v-if="hasMenu(Menu.COMPANY_ACCOUNT, Menu.MANAGER_ACCOUNT, Menu.EMPLOYEE_ACCOUNT)">
-            <a href="javascript:;">
-              <b class="caret"></b>
-              <i class="fas fa-folder"></i>
-              <span>职级管理</span>
-            </a>
-            <ul class="sub-menu">
-              <li v-if="hasMenu(Menu.COMPANY_ACCOUNT)">
-                <router-link :to="{name: 'compnay-setting'}">公司帐号</router-link>
-              </li>
-              <li v-if="hasMenu(Menu.MANAGER_ACCOUNT)">
-                <router-link :to="{name: 'manager-account'}">主管帐号</router-link>
-              </li>
-              <li v-if="hasMenu(Menu.COMPANY_SETTING)">
-                <router-link :to="{name: 'company-setting'}">职员帐号</router-link>
-              </li>
-            </ul>
-          </li>
-          <li class="has-sub" v-if="hasMenu(Menu.COMPANY_SETTING)">
-            <router-link :to="{name: 'company-setting'}">
-              <!-- <b class="caret"></b> -->
-              <i class="fas fa-columns"></i>
-              <span>公司设定</span>
-            </router-link>
-          </li>
-          <li class="has-sub" v-if="hasMenu(Menu.CURRENCY_SETTING)">
-            <router-link :to="{name: 'currency-setting'}">
-              <!-- <b class="caret"></b> -->
-              <i class="fas fa-sync"></i>
-              <span>币别设定</span>
-            </router-link>
-          </li>
-          <li class="has-sub" v-if="hasMenu(Menu.EXCHANGE_SETTING, Menu.EXCHANGE_RATE_SETTING)">
-            <a href="javascript:;">
-              <b class="caret"></b>
-              <i class="fas fa-table"></i>
-              <span>汇率管理</span>
-            </a>
-            <ul class="sub-menu">
-              <li v-if="hasMenu(Menu.EXCHANGE_SETTING)">
-                <router-link :to="{name: 'exchange-setting'}">兑换设定</router-link>
-              </li>
-              <li v-if="hasMenu(Menu.EXCHANGE_RATE_SETTING)">
-                <router-link :to="{name: 'exchange-rate-setting'}">汇率设定</router-link>
-              </li>
-            </ul>
-          </li>
-          <li class="has-sub " v-if="hasMenu(Menu.ACCOUNT_SETTING)">
-            <a href="javascript:;">
-              <b class="caret"></b>
-              <i class="fas fa-database"></i>
-              <span>银行管理</span>
-            </a>
-            <ul class="sub-menu">
-              <li class="" v-if="hasMenu(Menu.ACCOUNT_SETTING)">
-                <router-link :to="{name: 'account-setting'}">帐户设定</router-link>
-              </li>
-            </ul>
-          </li>
-          <li class="has-sub" v-if="hasMenu(Menu.ORDER_APPLY, Menu.ORDER_VERIFY)">
-            <a href="javascript:;">
-              <b class="caret"></b>
-              <i class="fas fa-copy"></i>
-              <span>订单管理</span>
-            </a>
-            <ul class="sub-menu">
-              <li v-if="hasMenu(Menu.ORDER_APPLY)">
-                <router-link :to="{name: 'order-apply'}">订单申请</router-link>
-              </li>
-              <li v-if="hasMenu(Menu.ORDER_VERIFY)">
-                <router-link :to="{name: 'order-verify'}">订单审核</router-link>
-              </li>
-            </ul>
-          </li>
-          <li class="has-sub" v-if="hasMenu(Menu.ACCOUNT_LOGIN_HISTORY)">
-            <a href="javascript:;">
-              <b class="caret"></b>
-              <i class="fas fa-history"></i>
-              <span>历程记录</span>
-            </a>
-            <ul class="sub-menu">
-              <li v-if="hasMenu(Menu.ACCOUNT_LOGIN_HISTORY)">
-                <router-link :to="{name: 'account-login-history'}">帐号登入历程</router-link>
-              </li>
-            </ul>
-          </li>
-          <!-- begin sidebar minify button -->
-          <li>
-            <a class="sidebar-minify-btn"
-               @click="isShowMenu = !isShowMenu"><i class="fa fa-angle-double-left"></i></a>
-          </li>
-          <!-- end sidebar minify button -->
-        </ul>
-        <!-- end sidebar nav -->
+        <!---Menu--->
+            <MenuComponent :router="menuRoutes"></MenuComponent>
+        <!---Menu--->
       </div>
       <!-- end sidebar scrollbar -->
     </div>
@@ -196,6 +86,8 @@
 </template>
 
 <script>
+  import menuRoutes from 'router/menuRoutes.js'
+  import MenuComponent from '@/Menu/Menu.vue';
   import CheckLoginMixins from 'mixins/CheckLogin'
   import IndexMixins from 'mixins/Index'
   import { LoginType } from 'module/login'
@@ -203,9 +95,13 @@
 
   export default {
     mixins: [CheckLoginMixins, IndexMixins],
+    components: {
+      MenuComponent
+    },
     data: () => ({
       isShowMenu: true,
       Menu,
+      menuRoutes
     }),
     methods: {
       doLogout()
@@ -227,19 +123,25 @@
       },
       hasMenu(...codes)
       {
-        for (let code of codes)
+        return _.some(codes, code =>
         {
-          if (_.some(this.menus, {code}))
-          {
-            return true
-          }
-        }
-        return false
+          const menu = _.find(this.menus, {code})
+          return menu && _.some(menu.nodes, x => _.endsWith(x.code, '_READ'))
+        })
       },
     },
     mounted()
     {
+      this.$bus.on('menu.show', data =>
+      {
+        this.isShowMenu = data
+      })
       this.dataInit()
     },
   }
 </script>
+
+<style lang="stylus">
+  .upload-box .img-show
+    display block
+</style>
