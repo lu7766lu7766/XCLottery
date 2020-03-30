@@ -44,12 +44,17 @@
       <label class="col-md-2 control-label required">角色</label>
       <div class="col-md-10">
         <validate rules="required">
-          <j-select
-            :datas="options.roles"
-            valueKey="id"
-            displayKey="display_name"
-            v-model="data.role_id"
-          ></j-select>
+          <multi-select
+            :options="
+              _.map(options.roles, role => ({
+                value: role.id,
+                text: role.display_name
+              }))
+            "
+            :selected-options="data.roles"
+            @select="item => (data.roles = item)"
+            v-model="data.roles"
+          />
         </validate>
       </div>
     </div>
@@ -77,14 +82,18 @@
 <script>
 import DetailMixins from 'mixins/Detail'
 import IndexMixins from 'mixins/Index'
+import { MultiSelect } from 'vue-search-select'
 
 export default {
   mixins: [DetailMixins, IndexMixins],
+  components: {
+    MultiSelect,
+  },
   methods: {
     async doSubmit()
     {
       const data = _.cloneDeep(this.data)
-      data.role_id = [data.role_id]
+      data.role_id = _.map(data.roles, 'value')
       await this.$thisApi.doUpdate(data)
       this.account.account == data.account && this.getAccount()
       this.updateSuccess()
@@ -95,7 +104,7 @@ export default {
     this.$bus.on('update.show', data =>
     {
       this.data = _.cloneDeep(data)
-      this.data.role_id = _.getVal(this.data.roles, '0.id')
+      this.data.roles = _.map(this.data.roles, x => ({ value: x.id, text: x.display_name }))
       this.show()
     })
   },
