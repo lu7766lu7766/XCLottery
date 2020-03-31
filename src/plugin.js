@@ -28,6 +28,11 @@ const install = (Vue, options) =>
 
   Vue.prototype.$api = new API()
   Vue.prototype.$jaclib = JacLib
+  Vue.prototype.$s3Host = () => { return ''}
+  (async () =>
+  {
+    Vue.prototype.$s3Host = (await Vue.prototype.$api.site.host.getS3Host()).data
+  })()
 
   Vue.component('JButton', require('@/Form/Button').default)
   Vue.component('JRadio', require('@/Form/Radio').default)
@@ -37,7 +42,7 @@ const install = (Vue, options) =>
 
   Vue.prototype.$translate = function (key, value)
   {
-    return _.getVal(this.translate, `${key}.${value}`)
+    return _.getVal(this.translate, `${ key }.${ value }`)
   }
   Vue.prototype.$alert = {
     success: (message) => Vue.bus.emit('alert.success', message),
