@@ -26,29 +26,27 @@
             </div>
             <div class="col-sm-10 form-inline justify-content-end panel-search">
               <div class="form-group width-100 m-r-10">
-                <select class="form-control" v-model="search.role_id">
-                  <option value="">角色</option>
-                  <option
-                    v-for="role in options.roles"
-                    :key="role.id"
-                    :value="role.id"
-                    >{{ role.display_name }}</option
-                  >
-                </select>
+                <j-select
+                  :datas="options.roles"
+                  v-model="search.role_id"
+                  title="角色"
+                  valueKey="id"
+                  displayKey="display_name"
+                ></j-select>
               </div>
               <div class="form-group width-100 m-r-10">
-                <select class="form-control" v-model="search.status">
-                  <option value="">状态</option>
-                  <option v-for="val in options.status" :key="val" :value="val">
-                    {{ $translate("status", val) }}
-                  </option>
-                </select>
+                <j-select
+                  :datas="options.status"
+                  v-model="search.status"
+                  title="状态"
+                  :translate="translate.status"
+                ></j-select>
               </div>
               <div class="form-group m-r-10">
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="关键字"
+                  placeholder="请输入帐号"
                   v-model="search.account"
                 />
               </div>
