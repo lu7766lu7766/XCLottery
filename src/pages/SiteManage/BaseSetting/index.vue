@@ -26,7 +26,7 @@
             <div class="form-group row m-b-15">
               <label class="col-md-3 col-lg-2 col-form-label required">网站名称</label>
               <div class="col-md-6 col-lg-6">
-                <validate rules="required">
+                <validate rules="required|max:50">
                   <input type="text" class="form-control" v-model="data.title">
                 </validate>
               </div>
@@ -45,13 +45,17 @@
             <div class="form-group row m-b-15">
               <label class="col-md-3 col-lg-2 col-form-label ">版权所有</label>
               <div class="col-md-6 col-lg-6">
-                <input type="text" class="form-control" v-model="data.copyright">
+                <validate rules="max:50">
+                  <input type="text" class="form-control" v-model="data.copyright">
+                </validate>
               </div>
             </div>
             <div class="form-group row m-b-15">
               <label class="col-md-3 col-lg-2 col-form-label">ICP备案编号</label>
               <div class="col-md-6 col-lg-6">
-                <input type="text" class="form-control" v-model="data.icp">
+                <validate rules="max:30">
+                  <input type="text" class="form-control" v-model="data.icp">
+                </validate>
               </div>
             </div>
             <div class="form-group row m-b-15">
@@ -132,10 +136,6 @@
       },
       async doSubmit()
       {
-        const data = _.cloneDeep(this.data)
-        data.logo = data.logo || data.logo_path
-        data.ios_qr_code = data.ios_qr_code || data.ios_qr_path
-        data.android_qr_code = data.android_qr_code || data.android_qr_path
         await this.$thisApi.doUpdate(this.data, { formData: true })
         this.$alert.success(`编辑成功`)
       },
