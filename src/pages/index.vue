@@ -67,7 +67,7 @@
 					</li>
 				</ul>
 				<!---Menu--->
-				<MenuComponent :router="menuRoutes"></MenuComponent>
+				<MenuComponent :router="menuRoutes" :isShowMenu="isShowMenu" @menu-toggle="isShowMenu = !isShowMenu"></MenuComponent>
 				<!---Menu--->
 			</div>
 			<!-- end sidebar scrollbar -->
@@ -88,21 +88,19 @@
 </template>
 
 <script>
-	import menuRoutes from 'router/menuRoutes.js'
-	import MenuComponent from '@/Menu/Menu.vue'
 	import CheckLoginMixins from 'mixins/CheckLogin'
 	import IndexMixins from 'mixins/Index'
 	import { LoginType } from 'module/login'
 	import Menu from 'constants/Menu'
+	import menuRoutes from 'router/menuRoutes.js'
 
 	export default {
 		mixins: [CheckLoginMixins, IndexMixins],
 		components: {
-			MenuComponent,
+			MenuComponent: require('@/Menu/Menu').default,
 		},
 		data: () => ({
 			isShowMenu: true,
-			Menu,
 			menuRoutes,
 		}),
 		methods: {
@@ -117,12 +115,6 @@
 					this.$nextTick(() => {
 						App.init()
 					})
-				})
-			},
-			hasMenu(...codes) {
-				return _.some(codes, code => {
-					const menu = _.find(this.menus, { code })
-					return menu && _.some(menu.nodes, x => _.endsWith(x.code, '_READ'))
 				})
 			},
 		},

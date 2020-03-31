@@ -13,13 +13,11 @@ const type = {
 
 export { type as NodeType }
 
-import RouteConstants from 'constants/Route'
 import MenuConstants from 'constants/Menu'
 
 const findNode = (nodes, route) =>
 {
-  const MenuCode = RouteConstants[route.name]
-  const code = MenuConstants[MenuCode]
+  const code = MenuConstants[route.name]
   return _.find(nodes, {code})
 }
 const READ_SUFFIX = '_READ'

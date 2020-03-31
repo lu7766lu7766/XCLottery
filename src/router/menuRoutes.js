@@ -7,16 +7,14 @@ export default [
 		children: [
 			{
 				path: 'role-manage',
-				name: 'role-manage',
+				name: 'ROLE_MG',
 				label: '角色管理',
-				hasMenu: 'ROLE_MG',
 				component: () => import('pages/SysSetting/RoleSetting'),
 			},
 			{
 				path: 'account-manage',
-				name: 'account-manage',
+				name: 'ACCOUNT_MG',
 				label: '帐号管理',
-				hasMenu: 'ACCOUNT_MG',
 				component: () => import('pages/SysSetting/AccountManage'),
 			},
 		],
@@ -29,9 +27,8 @@ export default [
 		children: [
 			{
 				path: 'account-login',
-				name: 'account-login-history',
+				name: 'ACCOUNT_LOGIN_HISTORY',
 				label: '帐号登入历程',
-				hasMenu: 'ACCOUNT_LOGIN_HISTORY',
 				component: () => import('pages/HistoryRecord/AccountLogin'),
 			},
 		],
