@@ -10,7 +10,7 @@
 		"bootstrap-vue": "^2.1.0",
 		"bytes": "^3.1.0",
 		"core-js": "^3.4.3",
-		"jactools": "^3.4.0",
+		"jactools": "^3.5.0",
 		"vee-validate": "^3.2.1",
 		"vue": "^2.6.10",
 		"vue-bootstrap-datetimepicker": "^5.0.1",
