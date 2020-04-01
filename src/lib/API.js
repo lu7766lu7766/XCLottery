@@ -22,6 +22,7 @@ export default class API
       news: {
         category: new (require('./Request/Site/News/Category').default)(),
       },
+      adSlide: new (require('./Request/Site/ADSlide').default)(),
     }
   }
 

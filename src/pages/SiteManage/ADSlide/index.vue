@@ -6,8 +6,7 @@
         <router-link :to="{ name: 'welcome' }">首页</router-link>
       </li>
       <li class="breadcrumb-item"><a href="javascript:;">网站管理</a></li>
-      <li class="breadcrumb-item"><a href="javascript:;">新闻资讯</a></li>
-      <li class="breadcrumb-item active">新闻分类</li>
+      <li class="breadcrumb-item active">广告轮播</li>
     </ol>
     <!-- end breadcrumb -->
 
@@ -17,22 +16,30 @@
       <div class="panel panel-inverse" style="clear:both;">
         <!-- begin panel-heading -->
         <div class="panel-heading p-t-10">
-          <h4 class="text-white m-b-0">新闻分类</h4>
+          <h4 class="text-white m-b-0">广告轮播</h4>
         </div>
         <!-- end panel-heading -->
         <!-- begin panel-body -->
         <div class="panel-body">
           <alert />
           <div class="row m-b-20 justify-content-end panel-search-box">
+            <div class="col-sm-2">
+              <j-button type="add" @click="$bus.emit('create.show')"></j-button>
+            </div>
             <div class="col-sm-10 form-inline justify-content-end panel-search">
               <div class="form-group width-100 m-r-10">
-                <j-select :datas="options.enable"
+                <j-select :datas="options.type"
+                          valueKey="id"
+                          title="类型"
+                          v-model="search.type_id"></j-select>
+              </div>
+              <div class="form-group width-100 m-r-10">
+                <j-select :datas="options.status"
                           title="状态"
-                          :translate="translate.enable"
-                          v-model="search.enable"></j-select>
+                          v-model="search.status"></j-select>
               </div>
               <div class="form-group m-r-10">
-                <input type="text" class="form-control" placeholder="请输入分类名称" v-model="search.name">
+                <input type="text" class="form-control" placeholder="请输入标题" v-model="search.title">
               </div>
               <j-button type="search" @click="doSearch"></j-button>
             </div>
@@ -43,8 +50,11 @@
               <thead>
               <tr>
                 <th class="width-30">#</th>
-                <th class="">分类名称</th>
-                <th class="width-100">显示</th>
+                <th class="width-200">图示</th>
+                <th>类型</th>
+                <th>标题</th>
+                <th>连结</th>
+                <th class="width-100">状态</th>
                 <th class="width-150">建立时间</th>
                 <th class="width-70">操作</th>
               </tr>
@@ -52,14 +62,20 @@
               <tbody>
               <tr v-for="(data, index) in datas" :key="index">
                 <td>{{ startIndex + index }}</td>
-                <td>{{ data.name }}</td>
+                <td class="td-img">
+                  <img :src="data.image_url" alt="">
+                </td>
+                <td>{{ data.type.name }}</td>
+                <td class="text-left">{{ data.title }}</td>
+                <td>{{ data.url }}</td>
                 <td>
-                  <i class="fas fa-lg fa-check-circle text-green" v-if="data.enable == 'Y'"></i>
+                  <i class="fas fa-lg fa-check-circle text-green" v-if="data.status == 'Y'"></i>
                   <i class="fas fa-lg fa-times-circle text-danger" v-else></i>
                 </td>
                 <td>{{ data.created_at }}</td>
                 <td class="text-center">
                   <j-button type="edit" :action="true" @click="$bus.emit('update.show', data)"></j-button>
+                  <j-button type="delete" :action="true" @click="doDelete(data.id)"></j-button>
                 </td>
               </tr>
 
@@ -68,11 +84,12 @@
           </div>
           <!-- end table-responsive -->
           <!-- pagination -->
-
+          <paginate :page="paginate.page" :lastPage="lastPage" @pageChange="pageChange" />
           <!-- end pagination -->
         </div>
       </div>
     </div>
+    <create />
     <update />
   </div>
 </template>
@@ -84,26 +101,27 @@
   export default {
     mixins: [ListMixins],
     components: {
+      create: require('./modal/create').default,
       update: require('./modal/update').default,
     },
     data: () => ({
       search: {
-        name: '',
-        enable: '',
+        type_id: '',
+        title: '',
+        status: '',
       },
-      options: {},
-      translate: {
-        enable: EnableConstant,
+      options: {
+        type: {},
+        status: EnableConstant,
       },
     }),
-    api: 'site.news.category',
+    api: 'site.adSlide',
     methods: {
       async getOptions()
       {
-        const res = await this.$thisApi.getOptions()
-        this.options = res.data
+        const res = await this.$thisApi.getTypes()
+        this.options.type = res.data
       },
-      getTotal() {},
     },
     mounted()
     {
