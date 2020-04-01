@@ -3,7 +3,9 @@
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label required">分类名称</label>
       <div class="col-md-10">
-        <input type="text" class="form-control" v-model="data.name" />
+        <validate rules="required">
+          <input type="text" class="form-control" v-model="data.name" />
+        </validate>
       </div>
     </div>
 

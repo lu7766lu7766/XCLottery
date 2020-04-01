@@ -32,14 +32,16 @@
               </div>
             </div>
             <div class="form-group row m-b-15">
-              <label class="col-md-3 col-lg-2 col-form-label">网站 LOGO</label>
+              <label class="col-md-3 col-lg-2 col-form-label required">网站 LOGO</label>
               <div class="col-md-6 col-lg-6 web-setting-uploadimg">
                 <validate rules="image|img_width:260|img_height:260" v-slot="{ validate }">
                   <j-image alert="上传图片限制尺寸为 260X260"
                            :validate="validate"
                            :src.sync="data.logo_path"
-                           v-model="data.logo"></j-image>
+                           @upload="file => {data.logo = file; data.del_logo = null}"
+                           @delete="() => {data.del_logo = 'Y'; data.logo = null}"></j-image>
                 </validate>
+                <span v-if="myLogoInValid" class="parsley-errors-list filled">必填欄位</span>
               </div>
             </div>
             <div class="form-group row m-b-15">
@@ -94,19 +96,22 @@
                 <validate class="col-md-6" rules="image|img_width:150|img_height:150" v-slot="{ validate }">
                   <j-image alert="iOS 上传图片限制尺寸为 150X150"
                            :validate="validate"
-                           v-model="data.ios_qr_code"
-                           :src.sync="data.ios_qr_path"></j-image>
+                           :src.sync="data.ios_qr_path"
+                           @upload="file => data.ios_qr_code = file"
+                           @delete="data.del_ios_qr_code = 'Y'"></j-image>
                 </validate>
                 <validate class="col-md-6" rules="image|img_width:150|img_height:150" v-slot="{ validate }">
                   <j-image alert="Android 上传图片限制尺寸为 150X150"
                            :validate="validate"
-                           v-model="data.android_qr_code"
-                           :src.sync="data.android_qr_path"></j-image>
+                           :src.sync="data.android_qr_path"
+                           @upload="file => data.android_qr_code = file"
+                           @delete="data.del_android_qr_code = 'Y'"></j-image>
                 </validate>
               </div>
             </div>
             <div class="m-t-30">
-              <button class="btn btn-primary width-70" :disabled="invalid" @click="doSubmit">储存</button>
+              <button class="btn btn-primary width-70" :disabled="invalid || myLogoInValid" @click="doSubmit">储存
+              </button>
             </div>
           </div>
         </validation>
@@ -132,12 +137,20 @@
       async getDetail()
       {
         const res = await this.$thisApi.getDetail()
-        this.data = res.data
+        this.data = { ...res.data, logo: null, del_logo: null }
       },
       async doSubmit()
       {
         await this.$thisApi.doUpdate(this.data, { formData: true })
         this.$alert.success(`编辑成功`)
+      },
+    },
+    computed: {
+      myLogoInValid()
+      {
+        return !(this.data.del_logo === 'Y'
+          ? !!this.data.logo
+          : (!!this.data.logo || !!this.data.logo_path))
       },
     },
     created()
