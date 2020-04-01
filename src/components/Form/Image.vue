@@ -7,6 +7,7 @@
         </label>
         <input class="imgupload" type="file" :id="id" @change="myValidate" />
       </div>
+      <button type="button" class="close" v-if="mySrc && showDelete" @click="onDelete">×</button>
       <div class="img-show" v-if="mySrc">
         <img alt="" class="OpenImgUpload" :src="mySrc">
       </div>
@@ -30,13 +31,17 @@
       },
       validate: {
         type: Function,
-        default: () => {},
+        default: () => ({ valid: true }),
       },
       src: {
         type: String,
         default: '',
       },
       s3: {
+        type: Boolean,
+        default: true,
+      },
+      showDelete: {
         type: Boolean,
         default: true,
       },
@@ -58,12 +63,19 @@
     methods: {
       async myValidate(e)
       {
-        return (await this.validate(e)).valid && this.onFileChange(e)
+        const res = await this.validate(e)
+        return res.valid && this.onFileChange(e)
       },
       async onFileChange(e)
       {
-        this.mySrc = await this.$jaclib.readImage(e.target.files[0])
-        this.$emit('input', e.target.files[0])
+        const file = e.target.files[0]
+        this.mySrc = await this.$jaclib.readImage(file)
+        this.$emit('upload', file)
+      },
+      onDelete()
+      {
+        this.mySrc = ''
+        this.$emit('delete')
       },
     },
     mounted()
@@ -72,3 +84,10 @@
     },
   }
 </script>
+
+<style lang="stylus" scoped>
+  .close
+    position relative
+    left 5px
+    top 5px
+</style>
