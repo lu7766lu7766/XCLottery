@@ -19,6 +19,9 @@ export default class API
     this.site = {
       base: new (require('./Request/Site/Base').default)(),
       host: new (require('./Request/Site/Host').default)(),
+      news: {
+        category: new (require('./Request/Site/News/Category').default)(),
+      },
     }
   }
 

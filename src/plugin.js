@@ -26,12 +26,13 @@ const install = (Vue, options) =>
 
   Vue.use(VueSweetalert2)
 
-  Vue.prototype.$api = new API()
+  const api = new API()
+  Vue.prototype.$api = api
   Vue.prototype.$jaclib = JacLib
   Vue.prototype.$s3Host = () => { return ''}
   (async () =>
   {
-    Vue.prototype.$s3Host = (await Vue.prototype.$api.site.host.getS3Host()).data
+    Vue.prototype.$s3Host = (await api.site.host.getS3Host()).data
   })()
 
   Vue.component('JButton', require('@/Form/Button').default)
