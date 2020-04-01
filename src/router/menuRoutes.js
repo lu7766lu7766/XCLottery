@@ -31,6 +31,19 @@ export default [
         label: '基本设置',
         component: () => import('pages/SiteManage/BaseSetting'),
       },
+      {
+        path: 'news',
+        label: '新闻资讯',
+        component: () => import('pages/SiteManage/News'),
+        children: [
+          {
+            path: 'category',
+            name: 'NEWS_CATEGORY',
+            label: '新闻分类',
+            component: () => import('pages/SiteManage/News/Category'),
+          },
+        ],
+      },
     ],
   },
   {
