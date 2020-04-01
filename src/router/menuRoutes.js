@@ -44,6 +44,12 @@ export default [
           },
         ],
       },
+      {
+        path: 'ad-slide',
+        name: 'AD_SLIDE',
+        label: '广告轮播',
+        component: () => import('pages/SiteManage/ADSlide'),
+      },
     ],
   },
   {

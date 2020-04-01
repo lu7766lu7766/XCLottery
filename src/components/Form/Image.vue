@@ -7,8 +7,8 @@
         </label>
         <input class="imgupload" type="file" :id="id" @change="myValidate" />
       </div>
-      <button type="button" class="close" v-if="mySrc && showDelete" @click="onDelete">×</button>
       <div class="img-show" v-if="mySrc">
+        <i class="fas fa-times" v-if="mySrc && showDelete" @click="onDelete"></i>
         <img alt="" class="OpenImgUpload" :src="mySrc">
       </div>
     </div>
