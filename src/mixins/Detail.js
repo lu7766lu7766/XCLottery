@@ -1,7 +1,8 @@
 export default {
   components: {
     Detail: require('@/Container/Detail').default,
-    Switcher: require('@/Form/Switcher').default,
+    Switcher: () => import('@/Form/Switcher'),
+    JImage: () => import('@/Form/Image'),
   },
   data: () => ({
     data: {},
@@ -22,7 +23,7 @@ export default {
     },
     doSuccess(msg)
     {
-      this.$alert.success(`${msg}成功`)
+      this.$alert.success(`${ msg }成功`)
       this.$modal.hide()
       this.$parent.doRefresh()
     },
