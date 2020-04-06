@@ -4,10 +4,10 @@
       <label class="col-md-2 col-form-label required">帐号</label>
       <div class="col-md-10">
         <input
-          type="text"
-          class="form-control"
-          :value="data.account"
-          disabled
+            type="text"
+            class="form-control"
+            :value="data.account"
+            disabled
         />
       </div>
     </div>
@@ -32,9 +32,9 @@
       <div class="col-md-10">
         <validate rules="confirmed:password">
           <input
-            type="password"
-            class="form-control"
-            v-model="data.password_confirmation"
+              type="password"
+              class="form-control"
+              v-model="data.password_confirmation"
           />
         </validate>
         <!--<div class="m-t-1 form-txt text-red">需英数组合, 4~16字元</div>-->
@@ -45,15 +45,15 @@
       <div class="col-md-10">
         <validate rules="required">
           <multi-select
-            :options="
+              :options="
               _.map(options.roles, role => ({
                 value: role.id,
                 text: role.display_name
               }))
             "
-            :selected-options="data.roles"
-            @select="item => (data.roles = item)"
-            v-model="data.roles"
+              :selected-options="data.roles"
+              @select="item => (data.roles = item)"
+              v-model="data.roles"
           />
         </validate>
       </div>
@@ -62,17 +62,17 @@
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label required">状态</label>
       <div class="col-md-10">
-        <switcher enable="enable" disable="disable" v-model="data.status" />
+        <switcher :enable="Const.ENABLE" :disable="Const.DISABLE" v-model="data.status" />
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">备注</label>
       <div class="col-md-10">
         <textarea
-          cols="30"
-          rows="5"
-          class="form-control"
-          v-model="data.remark"
+            cols="30"
+            rows="5"
+            class="form-control"
+            v-model="data.remark"
         ></textarea>
       </div>
     </div>
@@ -80,37 +80,37 @@
 </template>
 
 <script>
-import DetailMixins from 'mixins/Detail'
-import IndexMixins from 'mixins/Index'
-import { MultiSelect } from 'vue-search-select'
+  import DetailMixins from 'mixins/Detail'
+  import IndexMixins from 'mixins/Index'
+  import { MultiSelect } from 'vue-search-select'
 
-export default {
-  mixins: [DetailMixins, IndexMixins],
-  components: {
-    MultiSelect,
-  },
-  methods: {
-    async doSubmit()
-    {
-      const data = _.cloneDeep(this.data)
-      data.role_id = _.map(data.roles, 'value')
-      await this.$thisApi.doUpdate(data)
-      this.account.account == data.account && this.getAccount()
-      this.updateSuccess()
+  export default {
+    mixins: [DetailMixins, IndexMixins],
+    components: {
+      MultiSelect,
     },
-  },
-  mounted()
-  {
-    this.$bus.on('update.show', data =>
+    methods: {
+      async doSubmit()
+      {
+        const data = _.cloneDeep(this.data)
+        data.role_id = _.map(data.roles, 'value')
+        await this.$thisApi.doUpdate(data)
+        this.account.account == data.account && this.getAccount()
+        this.updateSuccess()
+      },
+    },
+    mounted()
     {
-      this.data = _.cloneDeep(data)
-      this.data.roles = _.map(this.data.roles, x => ({ value: x.id, text: x.display_name }))
-      this.show()
-    })
-  },
-  destroyed()
-  {
-    this.$bus.off('update.show')
-  },
-}
+      this.$bus.on('update.show', data =>
+      {
+        this.data = _.cloneDeep(data)
+        this.data.roles = _.map(this.data.roles, x => ({ value: x.id, text: x.display_name }))
+        this.show()
+      })
+    },
+    destroyed()
+    {
+      this.$bus.off('update.show')
+    },
+  }
 </script>

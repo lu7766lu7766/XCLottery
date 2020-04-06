@@ -5,10 +5,10 @@
         <label :for="id" class="custom-file-upload">
           {{ title }}
         </label>
-        <input class="imgupload" type="file" :id="id" @change="myValidate" />
+        <input class="imgupload" type="file" :id="id" @change="onFileChange" />
       </div>
       <div class="img-show" v-if="mySrc">
-        <i class="fas fa-times" v-if="mySrc && showDelete" @click="onDelete"></i>
+        <i class="fas fa-times" v-if="!required" @click="onDelete"></i>
         <img alt="" class="OpenImgUpload" :src="mySrc">
       </div>
     </div>
@@ -37,13 +37,19 @@
         type: String,
         default: '',
       },
+      required: {
+        type: Boolean,
+        default: false,
+      },
       s3: {
         type: Boolean,
         default: true,
       },
-      showDelete: {
-        type: Boolean,
-        default: true,
+      imageRequired: {
+        type: String,
+      },
+      value: {
+        type: Object,
       },
     },
     data: () => ({
@@ -61,21 +67,18 @@
       },
     },
     methods: {
-      async myValidate(e)
-      {
-        const res = await this.validate(e)
-        return res.valid && this.onFileChange(e)
-      },
       async onFileChange(e)
       {
         const file = e.target.files[0]
         this.mySrc = await this.$jaclib.readImage(file)
         this.$emit('upload', file)
+        this.validate(this.value)
       },
       onDelete()
       {
         this.mySrc = ''
         this.$emit('delete')
+        this.validate(this.value)
       },
     },
     mounted()
@@ -90,4 +93,10 @@
     position relative
     left 5px
     top 5px
+
+  .upload-box .img-show::before
+    content ''
+    width 0
+    height 0
+    background-color transparent
 </style>

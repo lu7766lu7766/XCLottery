@@ -30,9 +30,9 @@
       <div class="col-md-10">
         <validate rules="required|confirmed:password">
           <input
-            type="password"
-            class="form-control"
-            v-model="data.password_confirmation"
+              type="password"
+              class="form-control"
+              v-model="data.password_confirmation"
           />
         </validate>
         <!--<div class="m-t-1 form-txt text-red">需英数组合, 4~16字元</div>-->
@@ -43,15 +43,15 @@
       <div class="col-md-10">
         <validate rules="required">
           <multi-select
-            :options="
+              :options="
               _.map(options.roles, role => ({
                 value: role.id,
                 text: role.display_name
               }))
             "
-            :selected-options="data.roles"
-            @select="item => (data.roles = item)"
-            v-model="data.roles"
+              :selected-options="data.roles"
+              @select="item => (data.roles = item)"
+              v-model="data.roles"
           />
         </validate>
       </div>
@@ -60,17 +60,17 @@
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label required">状态</label>
       <div class="col-md-10">
-        <switcher enable="enable" disable="disable" v-model="data.status" />
+        <switcher :enable="Const.ENABLE" :disable="Const.DISABLE" v-model="data.status" />
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">备注</label>
       <div class="col-md-10">
         <textarea
-          cols="30"
-          rows="5"
-          class="form-control"
-          v-model="data.remark"
+            cols="30"
+            rows="5"
+            class="form-control"
+            v-model="data.remark"
         ></textarea>
       </div>
     </div>
@@ -78,38 +78,38 @@
 </template>
 
 <script>
-import DetailMixins from 'mixins/Detail'
-import { MultiSelect } from 'vue-search-select'
+  import DetailMixins from 'mixins/Detail'
+  import { MultiSelect } from 'vue-search-select'
 
-export default {
-  mixins: [DetailMixins],
-  components: {
-    MultiSelect,
-  },
-  methods: {
-    async doSubmit()
-    {
-      const data = _.cloneDeep(this.data)
-      data.role_id = _.map(data.roles, 'value')
-      await this.$thisApi.doCreate(data)
-      this.createSuccess()
+  export default {
+    mixins: [DetailMixins],
+    components: {
+      MultiSelect,
     },
-  },
-  mounted()
-  {
-    this.$bus.on('create.show', () =>
+    methods: {
+      async doSubmit()
+      {
+        const data = _.cloneDeep(this.data)
+        data.role_id = _.map(data.roles, 'value')
+        await this.$thisApi.doCreate(data)
+        this.createSuccess()
+      },
+    },
+    mounted()
     {
-      this.data = {
-        roles: [],
-        status: 'enable',
-      }
-      this.show()
-    })
+      this.$bus.on('create.show', () =>
+      {
+        this.data = {
+          roles: [],
+          status: 'enable',
+        }
+        this.show()
+      })
 
-  },
-  destroyed()
-  {
-    this.$bus.off('create.show')
-  },
-}
+    },
+    destroyed()
+    {
+      this.$bus.off('create.show')
+    },
+  }
 </script>

@@ -9,6 +9,7 @@ import VueBus from 'vue-bus'
 import numFormat from 'vue-filter-number-format'
 import 'vue-search-select/dist/VueSearchSelect.css'
 import { JacLib } from 'jactools'
+import Const from 'constants/Const'
 
 const install = (Vue, options) =>
 {
@@ -40,6 +41,8 @@ const install = (Vue, options) =>
   Vue.component('JSelect', require('@/Form/Select').default)
 
   Vue.component('Alert', require('@/Alert').default)
+
+  Vue.prototype.Const = Const
 
   Vue.prototype.$translate = function (key, value)
   {

@@ -40,26 +40,47 @@ extend('required_if', {
 extend('image', {
   validate: files => Array.from(files).every(file => /\.(jpg|svg|jpeg|png|bmp|gif)$/i.test(file.name)),
 })
-extend('img_width', {
-  params: ['value'],
-  validate: async (files, { value }) =>
+extend('image_required', {
+  params: ['sourceKey', 'targetKey'],
+  message: '',
+  validate: async (data, { sourceKey, targetKey }) =>
   {
+    return !!data[sourceKey] || !!data[targetKey]
+  },
+})
+const convert2Array = (data, targetKey) =>
+{
+  return data
+    ? data[targetKey]
+      ? data[targetKey].constructor != Array
+        ? [data[targetKey]]
+        : data[targetKey]
+      : []
+    : []
+}
+extend('img_width', {
+  params: ['targetKey', 'value'],
+  validate: async (data, { targetKey, value }) =>
+  {
+    let files = convert2Array(data, targetKey)
     for (const file of Array.from(files)) if ((await JacLib.readImageInstance(file)).width > +value) return false
     return true
   },
 })
 extend('img_height', {
-  params: ['value'],
-  validate: async (files, { value }) =>
+  params: ['targetKey', 'value'],
+  validate: async (data, { targetKey, value }) =>
   {
+    let files = convert2Array(data, targetKey)
     for (const file of Array.from(files)) if ((await JacLib.readImageInstance(file)).height > +value) return false
     return true
   },
 })
 extend('img_size', {
-  params: ['value', 'unit'],
-  validate: async (files, { value, unit = 'KB' }) =>
+  params: ['targetKey', 'value', 'unit'],
+  validate: async (data, { targetKey, value, unit = 'KB' }) =>
   {
+    let files = convert2Array(data, targetKey)
     let size = 0
     switch (unit)
     {
@@ -105,6 +126,7 @@ locale.messages = Object.assign(locale.messages, {
   numeric: () => '欄位需為數字',
   decimal: (filed, value) => `必須是數字，且能夠保留${ value.len }位小數`,
   image: () => '图片格式不符',
+  image_required: () => '图片不得为空',
   img_width: (filed, value) => `图片宽度不符合规范，上限為${ value.value }`,
   img_height: (filed, value) => `图片高度不符合规范，上限為${ value.value }`,
   img_size: (filed, value) => `图片大小不符合规范，上限為${ value.value }${ value.unit || 'KB' }`,
