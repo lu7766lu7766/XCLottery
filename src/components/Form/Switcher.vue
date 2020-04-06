@@ -6,11 +6,13 @@
 </template>
 
 <script>
+  import Const from 'constants/Const'
+
   export default {
     props: {
-      enable: {default: 'Y'},
-      disable: {default: 'N'},
-      value: {required: true},
+      enable: { default: Const.Y },
+      disable: { default: Const.N },
+      value: { required: true },
     },
     data: () => ({
       id: '',
@@ -27,7 +29,7 @@
     },
     mounted()
     {
-      this.id = 'switcher-' + parseInt(Math.random() * 100000)
+      this.id = this.$jaclib.createID('switcher-')
       this.data = this.value === this.enable
     },
   }

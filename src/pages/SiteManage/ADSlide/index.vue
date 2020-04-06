@@ -69,7 +69,7 @@
                 <td class="text-left">{{ data.title }}</td>
                 <td>{{ data.url }}</td>
                 <td>
-                  <i class="fas fa-lg fa-check-circle text-green" v-if="data.status == 'Y'"></i>
+                  <i class="fas fa-lg fa-check-circle text-green" v-if="data.status == Const.Y"></i>
                   <i class="fas fa-lg fa-times-circle text-danger" v-else></i>
                 </td>
                 <td>{{ data.created_at }}</td>

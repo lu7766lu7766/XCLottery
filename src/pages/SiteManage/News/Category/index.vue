@@ -54,7 +54,7 @@
                 <td>{{ startIndex + index }}</td>
                 <td>{{ data.name }}</td>
                 <td>
-                  <i class="fas fa-lg fa-check-circle text-green" v-if="data.enable == 'Y'"></i>
+                  <i class="fas fa-lg fa-check-circle text-green" v-if="data.enable == Const.Y"></i>
                   <i class="fas fa-lg fa-times-circle text-danger" v-else></i>
                 </td>
                 <td>{{ data.created_at }}</td>
