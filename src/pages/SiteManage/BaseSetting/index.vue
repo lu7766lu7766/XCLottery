@@ -99,7 +99,8 @@
                           v-slot="{ validate }">
                   <j-image alert="iOS 上传图片限制尺寸为 88X88"
                            :validate="validate"
-                           :src.sync="data.ios_qr_path"
+                           :src="data.ios_qr_path"
+                           :value="data"
                            @upload="file => data.ios_qr_code = file"
                            @delete="data.del_ios_qr_code = Const.DEL_IMAGE"></j-image>
                 </validate>
@@ -108,7 +109,8 @@
                           v-slot="{ validate }">
                   <j-image alert="Android 上传图片限制尺寸为 88X88"
                            :validate="validate"
-                           :src.sync="data.android_qr_path"
+                           :src="data.android_qr_path"
+                           :value="data"
                            @upload="file => data.android_qr_code = file"
                            @delete="data.del_android_qr_code = Const.DEL_IMAGE"></j-image>
                 </validate>

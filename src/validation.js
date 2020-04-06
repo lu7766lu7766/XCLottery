@@ -72,6 +72,7 @@ extend('img_height', {
   validate: async (data, { targetKey, value }) =>
   {
     let files = convert2Array(data, targetKey)
+    console.log(files)
     for (const file of Array.from(files)) if ((await JacLib.readImageInstance(file)).height > +value) return false
     return true
   },

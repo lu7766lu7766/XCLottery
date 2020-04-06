@@ -20,7 +20,7 @@
     "method": "post"
   },
   "delete": {
-    "uri": "delete",
-    "method": "post"
+    "uri": "",
+    "method": "delete"
   }
 }

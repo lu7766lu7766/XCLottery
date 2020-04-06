@@ -59,11 +59,7 @@
     watch: {
       src()
       {
-        this.mySrc = this.src
-          ? this.s3
-            ? this.$s3Host + this.src
-            : this.src
-          : ''
+        this.updateSrc()
       },
     },
     methods: {
@@ -80,9 +76,18 @@
         this.$emit('delete')
         this.validate(this.value)
       },
+      updateSrc()
+      {
+        this.mySrc = this.src
+          ? this.s3
+            ? this.$s3Host + this.src
+            : this.src
+          : ''
+      },
     },
     mounted()
     {
+      this.updateSrc()
       this.id = this.$jaclib.createID('imageUpload-')
     },
   }
