@@ -8,7 +8,7 @@
         <input class="imgupload" type="file" :id="id" @change="onFileChange" />
       </div>
       <div class="img-show" v-if="mySrc">
-        <i class="fas fa-times" v-if="mySrc" @click="onDelete"></i>
+        <i class="fas fa-times" v-if="!required" @click="onDelete"></i>
         <img alt="" class="OpenImgUpload" :src="mySrc">
       </div>
     </div>
@@ -36,6 +36,10 @@
       src: {
         type: String,
         default: '',
+      },
+      required: {
+        type: Boolean,
+        default: false,
       },
       s3: {
         type: Boolean,
@@ -89,4 +93,10 @@
     position relative
     left 5px
     top 5px
+
+  .upload-box .img-show::before
+    content ''
+    width 0
+    height 0
+    background-color transparent
 </style>

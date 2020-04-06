@@ -34,14 +34,14 @@
             <div class="form-group row m-b-15">
               <label class="col-md-3 col-lg-2 col-form-label required">网站 LOGO</label>
               <div class="col-md-6 col-lg-6 web-setting-uploadimg">
-                <validate rules="image|img_width:logo,260|img_height:logo,260|image_required:logo_path,logo,del_logo"
+                <validate rules="image|img_width:logo,260|img_height:logo,260|image_required:logo_path,logo"
                           v-slot="{ validate }">
                   <j-image alert="上传图片限制尺寸为 260X260"
                            :validate="validate"
                            :src="data.logo_path"
                            :value="data"
-                           @upload="file => {data.logo = file}"
-                           @delete="() => {data.del_logo = Const.DEL_IMAGE; data.logo = null}"></j-image>
+                           required
+                           @upload="file => {data.logo = file}"></j-image>
                 </validate>
               </div>
             </div>

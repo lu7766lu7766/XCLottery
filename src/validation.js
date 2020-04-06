@@ -2,7 +2,6 @@ import { extend, localize } from 'vee-validate'
 import { confirmed, max, max_value, min, min_value, required, required_if } from 'vee-validate/dist/rules'
 import locale from 'vee-validate/dist/locale/zh_CN'
 import { JacLib } from 'jactools'
-import Const from 'constants/Const'
 
 extend('required', {
   ...required,
@@ -42,13 +41,11 @@ extend('image', {
   validate: files => Array.from(files).every(file => /\.(jpg|svg|jpeg|png|bmp|gif)$/i.test(file.name)),
 })
 extend('image_required', {
-  params: ['sourceKey', 'targetKey', 'deleteKey'],
+  params: ['sourceKey', 'targetKey'],
   message: '',
-  validate: async (data, { sourceKey, targetKey, deleteKey }) =>
+  validate: async (data, { sourceKey, targetKey }) =>
   {
-    return data[deleteKey] === Const.DEL_IMAGE
-      ? !!data[targetKey]
-      : !!data[sourceKey] || !!data[targetKey]
+    return !!data[sourceKey] || !!data[targetKey]
   },
 })
 const convert2Array = (data, targetKey) =>
