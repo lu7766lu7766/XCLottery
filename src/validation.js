@@ -50,12 +50,10 @@ extend('image_required', {
 })
 const convert2Array = (data, targetKey) =>
 {
-  return data
-    ? data[targetKey]
-      ? data[targetKey].constructor != Array
-        ? [data[targetKey]]
-        : data[targetKey]
-      : []
+  return data && data[targetKey]
+    ? data[targetKey].constructor != Array
+      ? [data[targetKey]]
+      : data[targetKey]
     : []
 }
 extend('img_width', {
@@ -72,7 +70,6 @@ extend('img_height', {
   validate: async (data, { targetKey, value }) =>
   {
     let files = convert2Array(data, targetKey)
-    console.log(files)
     for (const file of Array.from(files)) if ((await JacLib.readImageInstance(file)).height > +value) return false
     return true
   },
