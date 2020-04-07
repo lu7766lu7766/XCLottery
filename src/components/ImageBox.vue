@@ -1,6 +1,6 @@
 <template>
   <section>
-    <img :src="src" @click="show" />
+    <img class="pointer" :src="src" @click="show" />
     <image-container ref="box" :src="src" size="auto" />
   </section>
 </template>
