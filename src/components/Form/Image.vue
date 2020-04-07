@@ -104,4 +104,7 @@
     width 0
     height 0
     background-color transparent
+
+  .img-show
+    width max-content
 </style>
