@@ -43,7 +43,9 @@
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label ">链接</label>
       <div class="col-md-10">
-        <input type="text" class="form-control" v-model="data.url">
+        <validate rules="url">
+          <input type="text" class="form-control" v-model="data.url">
+        </validate>
       </div>
     </div>
 

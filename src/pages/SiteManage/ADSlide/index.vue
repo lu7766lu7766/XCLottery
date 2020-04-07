@@ -63,7 +63,7 @@
               <tr v-for="(data, index) in datas" :key="index">
                 <td>{{ startIndex + index }}</td>
                 <td class="td-img">
-                  <img :src="$s3Host + data.image_path" alt="">
+                  <image-box :src="$s3Host + data.image_path" />
                 </td>
                 <td>{{ data.type.name }}</td>
                 <td class="text-left">{{ data.title }}</td>
