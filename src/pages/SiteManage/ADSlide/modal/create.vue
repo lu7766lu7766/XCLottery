@@ -21,7 +21,7 @@
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label required">图示 </label>
       <div class="col-md-10">
-        <validate rules="image|img_width:image,1170|img_height:image,325|image_required:image_path,image"
+        <validate rules="img|img_width:image,1170|img_height:image,325|img_required:image_path,image"
                   v-slot="{ validate }">
           <j-image alert="上传图片限制尺寸为1170 × 325"
                    :validate="validate"

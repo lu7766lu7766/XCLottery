@@ -34,7 +34,7 @@
             <div class="form-group row m-b-15">
               <label class="col-md-3 col-lg-2 col-form-label required">网站 LOGO</label>
               <div class="col-md-6 col-lg-6 web-setting-uploadimg">
-                <validate rules="image|img_width:logo,234|img_height:logo,74|image_required:logo_path,logo"
+                <validate rules="img|img_width:logo,234|img_height:logo,74|img_required:logo_path,logo"
                           v-slot="{ validate }">
                   <j-image alert="上传图片限制尺寸为 234X74"
                            :validate="validate"
@@ -95,7 +95,7 @@
               <label class="col-md-3 col-lg-2 col-form-label">QRCODE</label>
               <div class="col-md-6 col-lg-6 web-setting-uploadimg qrcode-box">
                 <validate class="col-md-6"
-                          rules="image|img_width:ios_qr_code,88|img_height:ios_qr_code,88"
+                          rules="img|img_width:ios_qr_code,88|img_height:ios_qr_code,88"
                           v-slot="{ validate }">
                   <j-image alert="iOS 上传图片限制尺寸为 88X88"
                            :validate="validate"
@@ -105,7 +105,7 @@
                            @delete="data.del_ios_qr_code = Const.DEL_IMAGE"></j-image>
                 </validate>
                 <validate class="col-md-6"
-                          rules="image|img_width:android_qr_code,88|img_height:android_qr_code,88"
+                          rules="img|img_width:android_qr_code,88|img_height:android_qr_code,88"
                           v-slot="{ validate }">
                   <j-image alert="Android 上传图片限制尺寸为 88X88"
                            :validate="validate"
