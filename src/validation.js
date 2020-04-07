@@ -37,10 +37,10 @@ extend('difference', {
 extend('required_if', {
   ...required_if,
 })
-extend('image', {
+extend('img', {
   validate: files => Array.from(files).every(file => /\.(jpg|svg|jpeg|png|bmp|gif)$/i.test(file.name)),
 })
-extend('image_required', {
+extend('img_required', {
   params: ['sourceKey', 'targetKey'],
   message: '',
   validate: async (data, { sourceKey, targetKey }) =>
@@ -123,8 +123,8 @@ locale.messages = Object.assign(locale.messages, {
   required_if: () => '必填欄位',
   numeric: () => '欄位需為數字',
   decimal: (filed, value) => `必須是數字，且能夠保留${ value.len }位小數`,
-  image: () => '图片格式不符',
-  image_required: () => '图片不得为空',
+  img: () => '图片格式不符',
+  img_required: () => '图片不得为空',
   img_width: (filed, value) => `图片宽度不符合规范，上限為${ value.value }`,
   img_height: (filed, value) => `图片高度不符合规范，上限為${ value.value }`,
   img_size: (filed, value) => `图片大小不符合规范，上限為${ value.value }${ value.unit || 'KB' }`,

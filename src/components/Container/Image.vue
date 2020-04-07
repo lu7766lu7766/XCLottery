@@ -1,7 +1,7 @@
 <template>
   <b-modal ref="modal"
            header-close-variant="black"
-           size="lg"
+           :size="size"
            hideFooter>
 
     <div id="img-dialog">
@@ -16,25 +16,34 @@
 </template>
 
 <script>
-  import DetailMixins from 'mixins/Detail'
-
   export default {
-    mixins: [DetailMixins],
-    data: () => ({
-      src: '',
-    }),
-    mounted()
-    {
-      this.$bus.on('image.show', src =>
-      {
-        this.src = src
-        this.$refs.modal.show()
-        // this.show()
-      })
+    props: {
+      src: {
+        type: String,
+      },
+      size: {
+        type: String,
+        default: 'lg',
+      },
     },
-    destroyed()
-    {
-      this.$bus.off('image.show')
+    methods: {
+      show()
+      {
+        this.$refs.modal.show()
+      },
     },
   }
 </script>
+
+<style lang="stylus" scoped>
+  #img-dialog img
+    max-width 100%
+</style>
+
+<style lang="stylus">
+  @media (min-width: 576px)
+    .modal-auto
+      width max-content
+      max-width none
+
+</style>
