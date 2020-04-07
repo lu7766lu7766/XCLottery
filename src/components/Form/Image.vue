@@ -107,4 +107,7 @@
 
   .img-show
     width max-content
+
+  .slider-upload-box .img-show
+    width auto
 </style>

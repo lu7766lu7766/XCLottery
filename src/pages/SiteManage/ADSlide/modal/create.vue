@@ -24,6 +24,7 @@
         <validate rules="img|img_width:image,1170|img_height:image,325|img_required:image_path,image"
                   v-slot="{ validate }">
           <j-image alert="上传图片限制尺寸为1170 × 325"
+                   class="slider-upload-box"
                    :validate="validate"
                    :src="data.image_path"
                    required

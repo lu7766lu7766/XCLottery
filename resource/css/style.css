@@ -629,6 +629,15 @@ label {
   line-height: 15px;
 }
 
+.slider-upload-box .custom-file {
+  width: 100%;
+}
+
+.slider-upload-box .custom-file img {
+  width: 100%;
+  max-width: initial;
+}
+
 .basic-list {
   display: -webkit-box;
   display: -ms-flexbox;

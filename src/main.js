@@ -5,6 +5,7 @@ import store from './store'
 import { sync } from 'vuex-router-sync'
 import MyPlugin from './plugin'
 import { JacPlugin } from 'jactools'
+import './css/my.styl'
 
 sync(store, router)
 
