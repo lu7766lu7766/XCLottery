@@ -1,13 +1,5 @@
 <template>
   <detail title="新增" @submit="doSubmit()">
-    <div class="form-group row m-b-15">
-      <label class="col-md-2 col-form-label required">类型</label>
-      <div class="col-md-10">
-        <validate rules="required">
-          <j-select :datas="options.type" valueKey="id" v-model="data.type_id" />
-        </validate>
-      </div>
-    </div>
 
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label required">标题</label>
@@ -19,34 +11,37 @@
     </div>
 
     <div class="form-group row m-b-15">
-      <label class="col-md-2 col-form-label required">图示 </label>
+      <label class="col-md-2 col-form-label">封面 </label>
       <div class="col-md-10">
-        <validate rules="img|img_width:image,1170|img_height:image,325|img_required:image_path,image"
+        <validate rules="img|img_width:image,263|img_height:image,300"
                   v-slot="{ validate }">
-          <j-image alert="上传图片限制尺寸为1170 × 325"
-                   class="slider-upload-box"
+          <j-image alert="上传图片限制尺寸为263 × 300"
                    :validate="validate"
-                   :src="data.image_path"
-                   required
                    :value="data"
-                   @upload="file => {data.image = file}"></j-image>
+                   @upload="file => {data.cover = file}"
+                   @delete="() => {data.remove_cover = 1; data.cover = null}"></j-image>
         </validate>
       </div>
     </div>
 
     <div class="form-group row m-b-15">
-      <label class="col-md-2 col-form-label">另开视窗</label>
+      <label class="col-md-2 col-form-label required">内容</label>
       <div class="col-md-10 switcher-box">
-        <switcher v-model="data.is_blank" />
+        <j-editor v-model="data.contents" @image-added="(f, e, c, r) => doUploadPic(f, e, c, r, 'editor_image_ids')" />
       </div>
     </div>
 
     <div class="form-group row m-b-15">
-      <label class="col-md-2 col-form-label ">链接</label>
-      <div class="col-md-10">
-        <validate rules="url">
-          <input type="text" class="form-control" v-model="data.url">
-        </validate>
+      <label class="col-md-2 col-form-label required">跑马灯</label>
+      <div class="col-md-10 switcher-box">
+        <switcher v-model="data.is_marquee" />
+      </div>
+    </div>
+
+    <div class="form-group row m-b-15">
+      <label class="col-md-2 col-form-label required">置顶</label>
+      <div class="col-md-10 switcher-box">
+        <switcher v-model="data.is_top" />
       </div>
     </div>
 
@@ -61,9 +56,10 @@
 
 <script>
   import DetailMixins from 'mixins/Detail'
+  import EditorMixins from 'mixins/Editor'
 
   export default {
-    mixins: [DetailMixins],
+    mixins: [DetailMixins, EditorMixins],
     methods: {
       async doSubmit()
       {
@@ -77,7 +73,10 @@
       this.$bus.on('create.show', data =>
       {
         this.data = {
+          is_marquee: this.Const.Y,
+          is_top: this.Const.Y,
           status: this.Const.Y,
+          editor_image_ids: [],
         }
         this.show()
       })

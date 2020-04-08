@@ -23,6 +23,7 @@ export default class API
         category: new (require('./Request/Site/News/Category').default)(),
       },
       adSlide: new (require('./Request/Site/ADSlide').default)(),
+      announcement: new (require('./Request/Site/Announcement').default)(),
     }
   }
 

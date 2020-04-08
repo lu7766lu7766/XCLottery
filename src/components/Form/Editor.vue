@@ -1,12 +1,12 @@
 <template>
   <v-editor v-model="data"
             useCustomImageHandler
-            @image-added="(d, e, c, r) => $emit('image-added', d, e, c, r)"></v-editor>
+            @image-added="(f, e, c, r) => $emit('image-added', f, e, c, r)"></v-editor>
 </template>
 
 <script>
   export default {
-    props: ['value', 'uploadPic'],
+    props: ['value'],
     components: {
       vEditor: require('vue2-editor').VueEditor,
     },
@@ -24,7 +24,7 @@
       },
     },
     methods: {
-      handleImageUpload(file, Editor, cursorLocation, resetUploader, url)
+      insertURL(Editor, cursorLocation, resetUploader, url)
       {
         Editor.insertEmbed(cursorLocation, 'image', url)
         resetUploader()
