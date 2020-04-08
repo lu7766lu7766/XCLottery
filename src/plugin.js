@@ -43,6 +43,7 @@ const install = (Vue, options) =>
   Vue.component('Alert', require('@/Alert').default)
 
   Vue.prototype.Const = Const
+  // Vue.prototype.console = console
 
   Vue.prototype.$translate = function (key, value)
   {

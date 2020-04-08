@@ -5,17 +5,18 @@ export default {
     jEditor,
   },
   methods: {
-    async doUploadPic(image, Editor, cursorLocation, resetUploader, key = 'image_ids')
+    async doUploadPic(image, Editor, cursorLocation, resetUploader, key)
     {
-      const res = await this.$thisApi.doUploadPic({image}, {formData: true})
-      this.insertImage(image, Editor, cursorLocation, resetUploader, res.data.file_url)
-      this.add2Data(key, res.data.id)
+      const res = await this.$thisApi.doUploadPic({ image }, { formData: true })
+      this.insertImage(Editor, cursorLocation, resetUploader, this.$s3Host + res.data.file_path)
+      // this.data[key].push(res.data.id)
+      this.add2DataList(key, res.data.id)
     },
-    insertImage(image, Editor, cursorLocation, resetUploader, url)
+    insertImage(Editor, cursorLocation, resetUploader, url)
     {
-      jEditor.methods.handleImageUpload(image, Editor, cursorLocation, resetUploader, url)
+      jEditor.methods.insertURL(Editor, cursorLocation, resetUploader, url)
     },
-    add2Data(key, id)
+    add2DataList(key, id)
     {
       this.data[key] = this.data[key] || []
       this.data[key].push(id)

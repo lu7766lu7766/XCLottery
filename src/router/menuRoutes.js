@@ -50,6 +50,12 @@ export default [
         label: '广告轮播',
         component: () => import('pages/SiteManage/ADSlide'),
       },
+      {
+        path: 'announcement-manage',
+        name: 'ANNOUNCEMENT_MG',
+        label: '公告管理',
+        component: () => import('pages/SiteManage/Announcement'),
+      },
     ],
   },
   {
