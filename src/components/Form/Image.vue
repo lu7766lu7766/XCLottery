@@ -5,7 +5,7 @@
         <label :for="id" class="custom-file-upload">
           {{ title }}
         </label>
-        <input class="imgupload" type="file" :id="id" @change="onFileChange" />
+        <input class="imgupload" type="file" :id="id" ref="input" @change="onFileChange" />
       </div>
       <div class="img-show" v-if="mySrc">
         <i class="fas fa-times" v-if="!required" @click="onDelete"></i>
@@ -74,6 +74,7 @@
       {
         this.mySrc = ''
         this.$emit('delete')
+        this.$refs['input'].value = ''
         this.validate(this.value)
       },
       updateSrc()
