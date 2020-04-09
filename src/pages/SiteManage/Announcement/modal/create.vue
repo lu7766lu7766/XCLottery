@@ -13,7 +13,7 @@
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">封面 </label>
       <div class="col-md-10">
-        <validate rules="img|img_width:image,263|img_height:image,300"
+        <validate rules="img|img_width:cover,263|img_height:cover,300"
                   v-slot="{ validate }">
           <j-image alert="上传图片限制尺寸为263 × 300"
                    :validate="validate"
@@ -27,7 +27,10 @@
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label required">内容</label>
       <div class="col-md-10 switcher-box">
-        <j-editor v-model="data.contents" @image-added="(f, e, c, r) => doUploadPic(f, e, c, r, 'editor_image_ids')" />
+        <validate rules="required">
+          <j-editor v-model="data.contents"
+                    @image-added="(f, e, c, r) => doUploadPic(f, e, c, r, 'editor_image_ids')" />
+        </validate>
       </div>
     </div>
 
