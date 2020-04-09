@@ -78,6 +78,7 @@
         this.data = {
           ...data,
           cover_path: data.cover,
+          cover: null,
           editor_image_ids: _.map(data.editor_files, 'id'),
         }
         this.show()
