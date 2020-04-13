@@ -56,6 +56,12 @@ export default [
         label: '公告管理',
         component: () => import('pages/SiteManage/Announcement'),
       },
+      {
+        path: 'friendship-link',
+        name: 'FRIENDSHIP_LINK',
+        label: '友情链结',
+        component: () => import('pages/SiteManage/Friendship'),
+      },
     ],
   },
   {
