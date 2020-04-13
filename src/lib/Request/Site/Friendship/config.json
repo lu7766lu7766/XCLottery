@@ -7,12 +7,8 @@
     "uri": "total",
     "method": "get"
   },
-  "uploadPic": {
-    "uri": "image/upload",
-    "method": "post"
-  },
   "create": {
-    "uri": "",
+    "uri": "create",
     "method": "post"
   },
   "update": {
@@ -20,7 +16,7 @@
     "method": "post"
   },
   "delete": {
-    "uri": "",
+    "uri": "del",
     "method": "delete"
   }
 }
