@@ -33,7 +33,7 @@
                           v-model="search.enable"></j-select>
               </div>
               <div class="form-group m-r-10">
-                <input type="text" class="form-control" placeholder="请输入标题" v-model="search.title">
+                <input type="text" class="form-control" placeholder="请输入名称" v-model="search.title">
               </div>
               <j-button type="search" @click="doSearch"></j-button>
             </div>

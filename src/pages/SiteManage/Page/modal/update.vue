@@ -4,7 +4,7 @@
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label required">代码</label>
       <div class="col-md-10">
-        <validate rules="required">
+        <validate rules="required|uppercase">
           <input type="text" class="form-control" v-model="data.code" />
         </validate>
       </div>
@@ -20,12 +20,10 @@
     </div>
 
     <div class="form-group row m-b-15">
-      <label class="col-md-2 col-form-label required">内容</label>
+      <label class="col-md-2 col-form-label ">内容</label>
       <div class="col-md-10 switcher-box">
-        <validate rules="required">
-          <j-editor v-model="data.content"
-                    @image-added="(f, e, c, r) => doUploadPic(f, e, c, r, 'editor_image_ids')" />
-        </validate>
+        <j-editor v-model="data.content"
+                  @image-added="(f, e, c, r) => doUploadPic(f, e, c, r, 'editor_image_ids')" />
       </div>
     </div>
 
