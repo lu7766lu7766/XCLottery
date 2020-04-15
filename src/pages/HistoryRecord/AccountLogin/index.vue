@@ -97,9 +97,6 @@
 
   export default {
     mixins: [ListMixins],
-    components: {
-      DateTimeSearchBar: require('@/DateTimeSearchBar').default,
-    },
     data: () => ({
       search: {
         start: moment().startOf('day').getDateTime(),

@@ -21,6 +21,7 @@ export default class API
       host: new (require('./Request/Site/Host').default)(),
       news: {
         category: new (require('./Request/Site/News/Category').default)(),
+        manage: new (require('./Request/Site/News/Manage').default)(),
       },
       adSlide: new (require('./Request/Site/ADSlide').default)(),
       announcement: new (require('./Request/Site/Announcement').default)(),
