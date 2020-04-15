@@ -5,6 +5,7 @@ export default {
   mixins: [PaginageMixins, ApiOptionMixins],
   components: {
     ImageBox: () => import('@/ImageBox'),
+    DateTimeSearchBar: () => import('@/DateTimeSearchBar'),
   },
   data: () => ({
     datas: [],
