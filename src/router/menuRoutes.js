@@ -56,6 +56,12 @@ export default [
         label: '公告管理',
         component: () => import('pages/SiteManage/Announcement'),
       },
+      {
+        path: 'page-manage',
+        name: 'PAGE_MG',
+        label: '页面管理',
+        component: () => import('pages/SiteManage/Page'),
+      },
     ],
   },
   {
