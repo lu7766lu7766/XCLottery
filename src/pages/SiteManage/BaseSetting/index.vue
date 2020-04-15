@@ -102,7 +102,7 @@
                            :src="data.ios_qr_path"
                            :value="data"
                            @upload="file => data.ios_qr_code = file"
-                           @delete="data.del_ios_qr_code = Const.DEL_IMAGE"></j-image>
+                           @delete="data.del_ios_qr_code = Const.Y"></j-image>
                 </validate>
                 <validate class="col-md-6"
                           rules="img|img_width:android_qr_code,88|img_height:android_qr_code,88"
@@ -112,7 +112,7 @@
                            :src="data.android_qr_path"
                            :value="data"
                            @upload="file => data.android_qr_code = file"
-                           @delete="data.del_android_qr_code = Const.DEL_IMAGE"></j-image>
+                           @delete="data.del_android_qr_code = Const.Y"></j-image>
                 </validate>
               </div>
             </div>

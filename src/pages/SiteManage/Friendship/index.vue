@@ -6,7 +6,7 @@
         <router-link :to="{ name: 'welcome' }">首页</router-link>
       </li>
       <li class="breadcrumb-item"><a href="javascript:;">网站管理</a></li>
-      <li class="breadcrumb-item active">友情链结</li>
+      <li class="breadcrumb-item active">友情链接</li>
     </ol>
     <!-- end breadcrumb -->
 
@@ -16,7 +16,7 @@
       <div class="panel panel-inverse" style="clear:both;">
         <!-- begin panel-heading -->
         <div class="panel-heading p-t-10">
-          <h4 class="text-white m-b-0">友情链结</h4>
+          <h4 class="text-white m-b-0">友情链接</h4>
         </div>
         <!-- end panel-heading -->
         <!-- begin panel-body -->
