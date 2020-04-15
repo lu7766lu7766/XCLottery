@@ -28,7 +28,7 @@
       <label class="col-md-2 col-form-label required">内容</label>
       <div class="col-md-10 switcher-box">
         <validate rules="required">
-          <j-editor v-model="data.content"
+          <j-editor v-model="data.contents"
                     @image-added="(f, e, c, r) => doUploadPic(f, e, c, r, 'editor_image_ids')" />
         </validate>
       </div>
