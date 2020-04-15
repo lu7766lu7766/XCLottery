@@ -109,6 +109,10 @@ extend('decimal', {
   },
 })
 
+extend('uppercase', {
+  validate: (value) => /^[A-Z]*$/.test(value),
+})
+
 locale.messages = Object.assign(locale.messages, {
   required: () => '必填欄位',
   max: (filed, value) => `字數需小於${ value.length }字元`,
@@ -128,6 +132,7 @@ locale.messages = Object.assign(locale.messages, {
   img_width: (filed, value) => `图片宽度不符合规范，上限為${ value.value }`,
   img_height: (filed, value) => `图片高度不符合规范，上限為${ value.value }`,
   img_size: (filed, value) => `图片大小不符合规范，上限為${ value.value }${ value.unit || 'KB' }`,
+  uppercase: () => `字母须为大写`,
 })
 
 localize('cn', locale)
