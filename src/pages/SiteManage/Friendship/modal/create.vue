@@ -19,7 +19,7 @@
                    :validate="validate"
                    :value="data"
                    @upload="file => {data.image = file}"
-                   @delete="() => {data.del_image = 1; data.image = null}"></j-image>
+                   @delete="() => {data.del_image = Const.Y; data.image = null}"></j-image>
         </validate>
       </div>
     </div>
@@ -68,7 +68,7 @@
       this.$bus.on('create.show', data =>
       {
         this.data = {
-          is_blank: this.Const.Y,
+          is_blank: this.Const.N,
           enable: this.Const.Y,
         }
         this.show()
