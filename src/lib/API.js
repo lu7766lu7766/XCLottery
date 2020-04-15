@@ -24,6 +24,8 @@ export default class API
       },
       adSlide: new (require('./Request/Site/ADSlide').default)(),
       announcement: new (require('./Request/Site/Announcement').default)(),
+      friendship: new (require('./Request/Site/Friendship').default)(),
+      page: new (require('./Request/Site/Page').default)(),
     }
   }
 
