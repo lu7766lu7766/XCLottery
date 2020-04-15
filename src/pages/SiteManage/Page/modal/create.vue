@@ -22,10 +22,8 @@
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">内容</label>
       <div class="col-md-10 switcher-box">
-        <div class="col-md-10 switcher-box">
-          <j-editor v-model="data.content"
-                    @image-added="(f, e, c, r) => doUploadPic(f, e, c, r, 'editor_image_ids')" />
-        </div>
+        <j-editor v-model="data.content"
+                  @image-added="(f, e, c, r) => doUploadPic(f, e, c, r, 'editor_image_ids')" />
       </div>
     </div>
 
