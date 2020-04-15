@@ -67,8 +67,8 @@
                 <td>
                   <image-box v-if="data.picture_url" :src="data.picture_url" />
                 </td>
-                <td>{{ data.title }}</td>
                 <td>{{ translate.classified[data.classified_id] }}</td>
+                <td>{{ data.title }}</td>
                 <td>{{ data.source }}</td>
                 <td>
                   <i class="fas fa-lg fa-check-circle text-green" v-if="data.enable == Const.Y"></i>
