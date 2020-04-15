@@ -62,6 +62,12 @@ export default [
         label: '友情链接',
         component: () => import('pages/SiteManage/Friendship'),
       },
+      {
+        path: 'page-manage',
+        name: 'PAGE_MG',
+        label: '页面管理',
+        component: () => import('pages/SiteManage/Page'),
+      },
     ],
   },
   {
