@@ -61,7 +61,7 @@
                     分类名称
                   </th>
                   <th class="width-100">
-                    显示
+                    状态
                   </th>
                   <th class="width-150">
                     建立时间

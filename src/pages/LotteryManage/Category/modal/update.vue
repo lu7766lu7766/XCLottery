@@ -10,7 +10,7 @@
     </div>
 
     <div class="form-group row m-b-15">
-      <label class="col-md-2 col-form-label required">显示</label>
+      <label class="col-md-2 col-form-label required">状态</label>
       <div class="col-md-10">
         <switcher v-model="data.enable" />
       </div>
