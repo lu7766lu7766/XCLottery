@@ -87,13 +87,13 @@ export default [
         name: 'LOTTERY_CATEGORY',
         label: '彩种分类',
         component: () => import('pages/LotteryManage/Category')
+      },
+      {
+        path: 'lottey-setting',
+        name: 'LOTTERY_MG',
+        label: '彩种设置',
+        component: () => import('pages/LotteryManage/Setting')
       }
-      // {
-      //   path: 'lottey-setting',
-      //   name: 'LOTTERY_MG',
-      //   label: '彩种设置',
-      //   component: () => import('pages/LotteryManage/LotterySetting')
-      // }
     ]
   },
   {

@@ -11,8 +11,7 @@ import 'vue-search-select/dist/VueSearchSelect.css'
 import { JacLib } from 'jactools'
 import Const from 'constants/Const'
 
-const install = (Vue, options) =>
-{
+const install = (Vue, options) => {
   Vue.use(BootstrapVue)
   Vue.use(VueBus)
   Vue.filter('numFormat', numFormat)
@@ -30,9 +29,8 @@ const install = (Vue, options) =>
   const api = new API()
   Vue.prototype.$api = api
   Vue.prototype.$jaclib = JacLib
-  Vue.prototype.$s3Host = () => { return ''}
-  (async () =>
-  {
+  Vue.prototype.$s3Host = () => { return '' }
+  (async () => {
     Vue.prototype.$s3Host = (await api.site.host.getS3Host()).data
   })()
 
@@ -45,20 +43,19 @@ const install = (Vue, options) =>
   Vue.prototype.Const = Const
   // Vue.prototype.console = console
 
-  Vue.prototype.$translate = function (key, value)
-  {
-    return _.getVal(this.translate, `${ key }.${ value }`)
+  Vue.prototype.$translate = function (key, value) {
+    return _.getVal(this.translate, `${key}.${value}`)
   }
   Vue.prototype.$alert = {
-    success: (message) => Vue.bus.emit('alert.success', message),
-    danger: (message) => Vue.bus.emit('alert.danger', message),
-    warning: (message) => Vue.bus.emit('alert.warning', message),
+    success: message => Vue.bus.emit('alert.success', message),
+    danger: message => Vue.bus.emit('alert.danger', message),
+    warning: message => Vue.bus.emit('alert.warning', message)
   }
   Vue.prototype.$modal = {
-    hide: () => { Vue.bus.emit('modal.hide') },
+    hide: () => { Vue.bus.emit('modal.hide') }
   }
 }
 
 export default {
-  install,
+  install
 }

@@ -27,7 +27,8 @@ export default class API {
       page: new (require('./Request/Site/Page').default)()
     }
     this.lottery = {
-      category: new (require('./Request/Lottery/Category').default)()
+      category: new (require('./Request/Lottery/Category').default)(),
+      setting: new (require('./Request/Lottery/Setting').default)()
     }
   }
 
