@@ -74,7 +74,9 @@
               <tbody>
                 <tr v-for="(data, index) in datas" :key="index">
                   <td>{{ startIndex + index }}</td>
-                  <td>{{ data.name }}</td>
+                  <td class="text-left">
+                    {{ data.name }}
+                  </td>
                   <td>
                     <i v-if="data.enable == Const.Y" class="fas fa-lg fa-check-circle text-green" />
                     <i v-else class="fas fa-lg fa-times-circle text-danger" />
