@@ -1,97 +1,92 @@
 <template>
   <div class="upload-box">
-    <div class="custom-file" id="imgupload-box">
+    <div id="imgupload-box" class="custom-file">
       <div>
         <label :for="id" class="custom-file-upload">
           {{ title }}
         </label>
-        <input class="imgupload" type="file" :id="id" ref="input" @change="onFileChange" />
+        <input :id="id" ref="input" class="imgupload" type="file" @change="onFileChange">
       </div>
-      <div class="img-show" v-if="mySrc">
-        <i class="fas fa-times" v-if="!required" @click="onDelete"></i>
+      <div v-if="mySrc" class="img-show">
+        <i v-if="!required" class="fas fa-times" @click="onDelete" />
         <img alt="" class="OpenImgUpload" :src="mySrc">
       </div>
     </div>
-    <div class="text-red" v-if="alert">
+    <div v-if="alert" class="text-red">
       {{ alert }}
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    props: {
-      title: {
-        type: String,
-        default: '选择档案',
-      },
-      alert: {
-        type: String,
-        default: '',
-      },
-      validate: {
-        type: Function,
-        default: () => ({ valid: true }),
-      },
-      src: {
-        type: String,
-        default: '',
-      },
-      required: {
-        type: Boolean,
-        default: false,
-      },
-      s3: {
-        type: Boolean,
-        default: true,
-      },
-      imageRequired: {
-        type: String,
-      },
-      value: {
-        type: Object,
-      },
+export default {
+  props: {
+    title: {
+      type: String,
+      default: '选择档案'
     },
-    data: () => ({
-      id: '',
-      mySrc: '',
-    }),
-    watch: {
-      src()
-      {
-        this.updateSrc()
-      },
+    alert: {
+      type: String,
+      default: ''
     },
-    methods: {
-      async onFileChange(e)
-      {
-        const file = e.target.files[0]
-        this.mySrc = await this.$jaclib.readImage(file)
-        this.$emit('upload', file)
-        this.validate(this.value)
-      },
-      onDelete()
-      {
-        this.mySrc = ''
-        this.$emit('delete')
-        this.$refs['input'].value = ''
-        this.validate(this.value)
-      },
-      updateSrc()
-      {
-        this.mySrc = this.src
-          ? this.s3
-            ? this.$s3Host + this.src
-            : this.src
-          : ''
-      },
+    validate: {
+      type: Function,
+      default: () => ({ valid: true })
     },
-    mounted()
-    {
+    src: {
+      type: String,
+      default: ''
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
+    s3: {
+      type: Boolean,
+      default: true
+    },
+    imageRequired: {
+      type: String
+    },
+    value: {
+      type: Object
+    }
+  },
+  data: () => ({
+    id: '',
+    mySrc: ''
+  }),
+  watch: {
+    src () {
       this.updateSrc()
-      this.id = this.$jaclib.createID('imageUpload-')
+    }
+  },
+  mounted () {
+    this.updateSrc()
+    this.id = this.$jaclib.createID('imageUpload-')
+  },
+  methods: {
+    async onFileChange (e) {
+      const file = e.target.files[0]
+      this.mySrc = await this.$jaclib.readImage(file)
+      this.$emit('upload', file)
+      this.validate(this.value)
     },
+    onDelete () {
+      this.mySrc = ''
+      this.$emit('delete')
+      this.$refs.input.value = ''
+      this.validate(this.value)
+    },
+    updateSrc () {
+      this.mySrc = this.src
+        ? this.s3
+          ? this.$s3Host + this.src
+          : this.src
+        : ''
+    }
   }
+}
 </script>
 
 <style lang="stylus" scoped>

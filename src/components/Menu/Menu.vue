@@ -1,15 +1,14 @@
 <template>
   <ul class="nav">
     <MenuItem
-      :isShowMenu="isShowMenu"
-      :item="item"
-      :key="index"
       v-for="(item, index) in router"
-    >
-    </MenuItem>
+      :key="index"
+      :is-show-menu="isShowMenu"
+      :item="item"
+    />
     <li>
       <a class="sidebar-minify-btn" @click="$emit('menu-toggle')">
-        <i class="fa fa-angle-double-left"></i>
+        <i class="fa fa-angle-double-left" />
       </a>
     </li>
   </ul>
@@ -19,7 +18,7 @@
 import MenuItem from './MenuItem'
 
 export default {
-  props: ['router', 'isShowMenu'],
   components: { MenuItem },
-};
+  props: ['router', 'isShowMenu']
+}
 </script>

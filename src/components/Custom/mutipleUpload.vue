@@ -7,23 +7,23 @@
         <!-- <div :class="cls.subtitle">{{ subtitle }}</div> -->
       </div>
 
-      <div v-for="(item, index) of imageList" :title="item.name" :key="index" :class="cls.item" :data-title="item.name">
-        <img :src="item.src" />
+      <div v-for="(item, index) of imageList" :key="index" :title="item.name" :class="cls.item" :data-title="item.name">
+        <img :src="item.src">
         <span :class="cls.close" @click="doDelete(item.id)">&times;</span>
       </div>
 
       <label :for="nextId" :class="cls.img">
         <span :class="cls.choice">+</span>
       </label>
-      <input :id="nextId" @change.prevent="onChoice" multiple style="display: none !important;" type="file" />
+      <input :id="nextId" multiple style="display: none !important;" type="file" @change.prevent="onChoice">
     </div>
   </div>
 </template>
 <script>
 import ImageMixins from 'mixins/Image'
-var namespace = 'im'
+const namespace = 'im'
 
-function toClass(name) {
+function toClass (name) {
   if (namespace) {
     if (namespace[-1] === '-') {
       return namespace + name
@@ -35,11 +35,11 @@ function toClass(name) {
   }
 }
 
-toClass.useSubNS = function(ns) {
-  var prefix = toClass(ns).trim()
+toClass.useSubNS = function (ns) {
+  let prefix = toClass(ns).trim()
 
   prefix = prefix ? (prefix[-1] === '-' ? prefix : prefix + '-') : prefix
-  return function(name) {
+  return function (name) {
     return name ? prefix + name : prefix.slice(0, -1)
   }
 }
@@ -55,60 +55,60 @@ const classes = {
   foot: creator('foot'),
   close: creator('close'),
   tips: creator('tips'),
-  subtitle: creator('subtitle'),
+  subtitle: creator('subtitle')
 }
 
-const megaByte = 1024 * 1024
+// const megaByte = 1024 * 1024
 
 export default {
   mixins: [ImageMixins],
   props: {
     dataImageIds: {
       type: Array,
-      default: [],
+      default: () => []
     },
     imageList: { type: Array, required: true },
-    subtitle: { type: String, default: '' },
+    subtitle: { type: String, default: '' }
   },
-  computed: {
-    nextId: function() {
-      return (Math.random() + '').substring(2)
-    },
-    cls: function() {
-      return classes
-    },
-  },
-  data() {
+  data () {
     return {
-      dragOver: false,
+      dragOver: false
     }
   },
+  computed: {
+    nextId () {
+      return (Math.random() + '').substring(2)
+    },
+    cls () {
+      return classes
+    }
+  },
+  destroyed () {
+    this.$emit('doDelImageList')
+  },
   methods: {
-    onDrop: function(event) {
-      let data = event.dataTransfer
+    onDrop (event) {
+      const data = event.dataTransfer
       if (data) {
         this.uploadImage(data.files)
       }
     },
-    onPaste: function(event) {
-      let data = event.clipboardData
+    onPaste (event) {
+      const data = event.clipboardData
       if (data) {
         this.uploadImage(data.items)
       }
     },
-    async onChoice(event) {
+    onChoice (event) {
       this.uploadImage(event.target.files)
     },
-    uploadImage: function(file) {
+    uploadImage (file) {
       this.$emit('onImageUpload', [...file])
     },
-    doDelete: function(id) {
+    doDelete (id) {
       this.$emit('onImageDelete', id)
-    },
-  },
-  async destroyed() {
-    this.$emit('doDelImageList')
-  },
+    }
+  }
 }
 </script>
 

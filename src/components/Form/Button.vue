@@ -1,7 +1,14 @@
 <template>
-  <span v-if="hasPermission" :class="className" data-toggle="tooltip" data-trigger="hover" data-container="body" :data-title="name">
+  <span
+    v-if="hasPermission"
+    :class="className"
+    data-toggle="tooltip"
+    data-trigger="hover"
+    data-container="body"
+    :data-title="name"
+  >
     <a class="btn text-white" :class="{ [btnColor]: true, 'btn-control': action }" @click="$emit('click')">
-      <i class="fas" :class="btnIcon"></i>
+      <i class="fas" :class="btnIcon" />
       <span v-if="!action">{{ name }}</span>
     </a>
   </span>
@@ -15,25 +22,25 @@ export default {
   props: {
     type: {
       type: String,
-      required: true,
+      required: true
     },
     action: {
       type: Boolean,
-      default: false,
+      default: false
     },
     ignorePermission: {
-      default: false,
+      default: false
     },
     iName: '',
     iBtnColor: '',
-    iBtnIcon: '',
+    iBtnIcon: ''
   },
   data: () => ({
     hasPermission: false,
     className: '',
     name: '',
     btnColor: '',
-    btnIcon: '',
+    btnIcon: ''
   }),
   computed: {
     ...mapGetters({
@@ -41,10 +48,10 @@ export default {
       canCreate: NodeType.canCreate,
       canUpdate: NodeType.canUpdate,
       canDelete: NodeType.canDelete,
-      canPermission: NodeType.canPermission,
-    }),
+      canPermission: NodeType.canPermission
+    })
   },
-  mounted() {
+  mounted () {
     switch (this.type) {
       case 'search':
         this.className = 'search-btn'
@@ -109,7 +116,7 @@ export default {
         this.hasPermission = this.canRead
         break
     }
-  },
+  }
 }
 </script>
 

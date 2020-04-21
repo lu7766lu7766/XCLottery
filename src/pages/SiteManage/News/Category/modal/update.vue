@@ -4,7 +4,7 @@
       <label class="col-md-2 col-form-label required">分类名称</label>
       <div class="col-md-10">
         <validate rules="required">
-          <input type="text" class="form-control" v-model="data.name" />
+          <input v-model="data.name" type="text" class="form-control">
         </validate>
       </div>
     </div>
@@ -19,29 +19,25 @@
 </template>
 
 <script>
-  import DetailMixins from 'mixins/Detail'
+import DetailMixins from 'mixins/Detail'
 
-  export default {
-    mixins: [DetailMixins],
-    methods: {
-      async doSubmit()
-      {
-        const data = _.cloneDeep(this.data)
-        await this.$thisApi.doUpdate(data)
-        this.updateSuccess()
-      },
-    },
-    mounted()
-    {
-      this.$bus.on('update.show', data =>
-      {
-        this.data = _.cloneDeep(data)
-        this.show()
-      })
-    },
-    destroyed()
-    {
-      this.$bus.off('update.show')
-    },
+export default {
+  mixins: [DetailMixins],
+  mounted () {
+    this.$bus.on('update.show', (data) => {
+      this.data = _.cloneDeep(data)
+      this.show()
+    })
+  },
+  destroyed () {
+    this.$bus.off('update.show')
+  },
+  methods: {
+    async doSubmit () {
+      const data = _.cloneDeep(this.data)
+      await this.$thisApi.doUpdate(data)
+      this.updateSuccess()
+    }
   }
+}
 </script>

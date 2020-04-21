@@ -1,6 +1,5 @@
 <template>
   <detail title="编辑" @submit="doSubmit()">
-
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label ">分类</label>
       <div class="col-md-10">
@@ -32,7 +31,7 @@
       <label class="col-md-2 col-form-label ">封面</label>
       <div class="col-md-10">
         <div class="form-txt">
-          <img :src="data.picture_url" />
+          <img :src="data.picture_url">
         </div>
       </div>
     </div>
@@ -40,7 +39,7 @@
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label ">内容</label>
       <div class="col-md-10">
-        <div class="form-txt" v-if="data.full_text">
+        <div v-if="data.full_text" class="form-txt">
           {{ data.full_text.title }}<br>
           <span v-html="data.full_text.content" />
         </div>
@@ -66,29 +65,25 @@
 </template>
 
 <script>
-  import DetailMixins from 'mixins/Detail'
+import DetailMixins from 'mixins/Detail'
 
-  export default {
-    mixins: [DetailMixins],
-    methods: {
-      async doSubmit()
-      {
-        const data = _.cloneDeep(this.data)
-        await this.$thisApi.doUpdate(data)
-        this.updateSuccess()
-      },
-    },
-    mounted()
-    {
-      this.$bus.on('update.show', data =>
-      {
-        this.data = _.cloneDeep(data)
-        this.show()
-      })
-    },
-    destroyed()
-    {
-      this.$bus.off('update.show')
-    },
+export default {
+  mixins: [DetailMixins],
+  mounted () {
+    this.$bus.on('update.show', (data) => {
+      this.data = _.cloneDeep(data)
+      this.show()
+    })
+  },
+  destroyed () {
+    this.$bus.off('update.show')
+  },
+  methods: {
+    async doSubmit () {
+      const data = _.cloneDeep(this.data)
+      await this.$thisApi.doUpdate(data)
+      this.updateSuccess()
+    }
   }
+}
 </script>

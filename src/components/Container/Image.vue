@@ -1,38 +1,39 @@
 <template>
-  <b-modal ref="modal"
-           header-close-variant="black"
-           :size="size"
-           hideFooter>
-
+  <b-modal
+    ref="modal"
+    header-close-variant="black"
+    :size="size"
+    hide-footer
+  >
     <div id="img-dialog">
       <div class="img">
         <img :src="src" alt="">
       </div>
     </div>
 
-    <template slot="modal-footer"><span></span></template>
-
+    <template slot="modal-footer">
+      <span />
+    </template>
   </b-modal>
 </template>
 
 <script>
-  export default {
-    props: {
-      src: {
-        type: String,
-      },
-      size: {
-        type: String,
-        default: 'lg',
-      },
+export default {
+  props: {
+    src: {
+      type: String
     },
-    methods: {
-      show()
-      {
-        this.$refs.modal.show()
-      },
-    },
+    size: {
+      type: String,
+      default: 'lg'
+    }
+  },
+  methods: {
+    show () {
+      this.$refs.modal.show()
+    }
   }
+}
 </script>
 
 <style lang="stylus" scoped>
