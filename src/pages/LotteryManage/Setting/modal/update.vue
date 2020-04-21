@@ -67,7 +67,6 @@ export default {
     this.$bus.on('update.show', (data) => {
       this.data = Object.assign({ classified_ids: [] }, data)
       this.data.classified_ids = data.classified
-      console.log(this.data)
       this.show()
     })
   },
