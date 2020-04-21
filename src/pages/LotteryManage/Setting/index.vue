@@ -83,7 +83,7 @@
               <tbody>
                 <tr v-for="(data, index) in datas" :key="index">
                   <td>{{ startIndex + index }}</td>
-                  <td class="td-img">
+                  <td style="width:100px">
                     <image-box :src="toResourceUrl(data.image_path)" />
                   </td>
                   <td>
