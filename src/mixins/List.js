@@ -39,6 +39,7 @@ export default {
     async getList () {
       const res = await this.$thisApi.getList(this.reqBody)
       this.datas = res.data
+      this.$bus.emit('scrollTop.show')
     },
     async getTotal () {
       const res = await this.$thisApi.getTotal(this.reqBody)

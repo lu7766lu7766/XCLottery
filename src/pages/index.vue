@@ -105,6 +105,11 @@ export default {
     menuRoutes
   }),
   mounted () {
+    this.$bus.on('scrollTop.show', (data) => {
+      $('html, body').animate({
+        scrollTop: $('body').offset().top
+      }, 500)
+    })
     this.$bus.on('menu.show', (data) => {
       this.isShowMenu = data
     })

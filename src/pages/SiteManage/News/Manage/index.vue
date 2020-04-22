@@ -113,7 +113,7 @@
           </div>
           <!-- end table-responsive -->
           <!-- pagination -->
-
+          <paginate :page="paginate.page" :last-page="lastPage" @pageChange="pageChange" />
           <!-- end pagination -->
         </div>
       </div>
@@ -156,7 +156,10 @@ export default {
       this.options.classified = res.data.classified
       this.translate.classified = _.keyVal(this.options.classified, 'id', 'name')
     },
-    getTotal () {}
+    async getTotal () {
+      const res = await this.$thisApi.getTotal(this.reqBody)
+      this.paginate.total = res.data
+    }
   }
 }
 </script>
