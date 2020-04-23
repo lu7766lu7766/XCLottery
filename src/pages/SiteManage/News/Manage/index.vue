@@ -95,7 +95,7 @@
                   </td>
                   <td>{{ translate.classified[data.classified_id] }}</td>
                   <td class="text-left">
-                    {{ data.title }}
+                    <span v-html="data.title" />
                   </td>
                   <td>{{ data.source }}</td>
                   <td>

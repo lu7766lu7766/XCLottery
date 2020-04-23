@@ -13,7 +13,7 @@
       <label class="col-md-2 col-form-label ">标题</label>
       <div class="col-md-10">
         <div class="form-txt">
-          {{ data.title }}
+          <span v-html="data.title" />
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <label class="col-md-2 col-form-label ">内容</label>
       <div class="col-md-10">
         <div v-if="data.full_text" class="form-txt">
-          {{ data.full_text.title }}<br>
+          <span v-html="data.full_text.title" /><br>
           <span v-html="data.full_text.content" />
         </div>
       </div>
