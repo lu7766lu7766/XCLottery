@@ -70,8 +70,9 @@ import DetailMixins from 'mixins/Detail'
 export default {
   mixins: [DetailMixins],
   mounted () {
-    this.$bus.on('update.show', (data) => {
-      this.data = _.cloneDeep(data)
+    this.$bus.on('update.show', async (data) => {
+      const res = await this.$thisApi.getFullText({ id: data.id })
+      this.data = Object.assign({}, data, { full_text: res.data.full_text })
       this.show()
     })
   },

@@ -23,6 +23,10 @@ export default class Request extends BaseRequest {
     return await this.request('option', data, options)
   }
 
+  async getFullText (data, options) {
+    return await this.request('fullText', data, options)
+  }
+
   async doCreate (data, options) {
     return await this.request('create', data, options)
   }

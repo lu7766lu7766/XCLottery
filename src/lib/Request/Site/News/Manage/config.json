@@ -11,6 +11,10 @@
     "uri": "options",
     "method": "get"
   },
+  "fullText": {
+    "uri": "full_text",
+    "method": "get"
+  },
   "create": {
     "uri": "create",
     "method": "post"
