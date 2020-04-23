@@ -3,7 +3,7 @@ import _config from './config'
 
 export default class AccountManage extends BaseRequest {
   get baseUrls () {
-    return super.baseUrls.concat('/account/login/history')
+    return super.baseUrls.concat('/lottery_result/manage')
   }
 
   constructor () {
@@ -21,5 +21,13 @@ export default class AccountManage extends BaseRequest {
 
   async getOptions (data, options) {
     return await this.request('options', data, options)
+  }
+
+  async doUpdate (data, options) {
+    return await this.request('update', data, options)
+  }
+
+  async doDelete (data, options) {
+    return await this.request('delete', data, options)
   }
 }

@@ -35,24 +35,18 @@
               <div class="form-group width-100 m-r-10">
                 <j-select
                   v-model="search.classified_id"
-                  :datas="options.classified"
+                  :datas="options.lottery_classified"
                   value-key="id"
                   title="分类"
                 />
               </div>
               <div class="form-group width-100 m-r-10">
-                <select v-model="search.role_id" class="form-control">
-                  <option value="">
-                    游戏
-                  </option>
-                  <option
-                    v-for="role in options.role"
-                    :key="role.id"
-                    :value="role.id"
-                  >
-                    {{ role.display_name }}
-                  </option>
-                </select>
+                <j-select
+                  v-model="search.lottery_id"
+                  :datas="options.lottery_game"
+                  value-key="id"
+                  title="游戏"
+                />
               </div>
               <div class="form-group width-100 m-r-10">
                 <j-select
@@ -63,7 +57,7 @@
               </div>
               <div class="form-group m-r-10">
                 <input
-                  v-model="search.keyword"
+                  v-model="search.period"
                   type="text"
                   class="form-control"
                   placeholder="请输入期数"
@@ -81,17 +75,20 @@
                     #
                   </th>
                   <th>彩种</th>
-                  <th>期数</th>
-                  <th>开奖时间</th>
-                  <th>角色</th>
                   <th class="width-200">
+                    期数
+                  </th>
+                  <th class="width-150">
+                    开奖时间
+                  </th>
+                  <th>
                     开奖号码
                   </th>
                   <th class="width-100">
                     状态
                   </th>
                   <th class="width-150">
-                    登入时间
+                    建立时间
                   </th>
                   <th class="width-70">
                     操作
@@ -101,18 +98,24 @@
               <tbody>
                 <tr v-for="(data, index) in datas" :key="index">
                   <td>{{ startIndex + index }}</td>
-                  <td>{{ data.account.account }}</td>
-                  <td />
-                  <td>{{ data.account.display_name }}</td>
-                  <td class="text-blue">
-                    {{ _.map(data.account.roles, 'display_name').join(', ') }}
+                  <td>{{ data.game.name }}</td>
+                  <td>{{ data.period }}</td>
+                  <td>{{ data.draw_time }}</td>
+                  <td class="text-left open-num">
+                    <span
+                      v-for="(t, i) in data.winning_numbers"
+                      :key="i"
+                      class="num"
+                      :class="{'special':i === data.winning_numbers.length-1}"
+                    >
+                      <span>{{ t }}</span>
+                    </span>
                   </td>
-                  <td>{{ data.login_ip }}</td>
                   <td>
-                    <!-- <i v-if="data.enable == Const.Y" class="fas fa-lg fa-check-circle text-green" />
-                    <i v-else class="fas fa-lg fa-times-circle text-danger" /> -->
+                    <i v-if="data.enable == Const.Y" class="fas fa-lg fa-check-circle text-green" />
+                    <i v-else class="fas fa-lg fa-times-circle text-danger" />
                   </td>
-                  <td>{{ data.updated_at }}</td>
+                  <td>{{ data.created_at }}</td>
                   <td class="text-center">
                     <j-button type="edit" :action="true" @click="$bus.emit('update.show', data)" />
                     <j-button type="delete" :action="true" @click="doDelete(data.id)" />
@@ -149,9 +152,10 @@ export default {
     search: {
       start: moment().startOf('day').getDateTime(),
       end: moment().endOf('day').getDateTime(),
-      role_id: '', //
+      classified_id: '',
+      lottery_id: '',
       enable: '',
-      keyword: ''//
+      period: ''
     },
     options: {
       enable: EnableConstant
@@ -166,6 +170,7 @@ export default {
     async getOptions () {
       const res = await this.$thisApi.getOptions()
       this.options = Object.assign({}, this.options, res.data)
+      this.options.enable = EnableConstant
     },
     async getList () {
       const res = await this.$thisApi.getList(this.reqBody)

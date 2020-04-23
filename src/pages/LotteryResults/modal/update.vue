@@ -2,9 +2,9 @@
   <detail title="编辑" @submit="doSubmit()">
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label required">彩种</label>
-      <div class="col-md-10">
+      <div v-if="data.game" class="col-md-10">
         <validate rules="required">
-          <input v-model="data.name" :disabled="true" type="text" class="form-control">
+          <input v-model="data.game.name" :disabled="true" type="text" class="form-control">
         </validate>
       </div>
     </div>
@@ -12,7 +12,7 @@
       <label class="col-md-2 col-form-label required">期数</label>
       <div class="col-md-10">
         <validate rules="required">
-          <input v-model="data.name" :disabled="true" type="text" class="form-control">
+          <input v-model="data.period" :disabled="true" type="text" class="form-control">
         </validate>
       </div>
     </div>
@@ -20,22 +20,15 @@
       <label class="col-md-2 col-form-label required">开奖时间</label>
       <div class="col-md-10">
         <validate rules="required">
-          <input v-model="data.name" :disabled="true" type="text" class="form-control">
+          <input v-model="data.draw_time" :disabled="true" type="text" class="form-control">
         </validate>
       </div>
     </div>
     <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label required">开奖号码</label>
-      <div class="col-md-10">
+      <div v-if="data.game" class="col-md-10">
         <validate rules="required">
-          <div class="input-group">
-            <date-time-picker v-model="data.name" />
-            <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="far fa-calendar-alt" />
-              </span>
-            </div>
-          </div>
+          <input v-model="data.winning_numbers" type="text" class="form-control">
         </validate>
       </div>
     </div>
@@ -57,6 +50,7 @@ export default {
   mounted () {
     this.$bus.on('update.show', (data) => {
       this.data = _.cloneDeep(data)
+      this.data.winning_numbers = this.data.winning_numbers.join()
       this.show()
     })
   },
@@ -66,6 +60,7 @@ export default {
   methods: {
     async doSubmit () {
       const data = _.cloneDeep(this.data)
+      data.winning_numbers = data.winning_numbers.split(',')
       await this.$thisApi.doUpdate(data)
       this.updateSuccess()
     }
