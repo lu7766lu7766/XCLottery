@@ -97,6 +97,13 @@ export default [
     ]
   },
   {
+    path: 'lottery-results',
+    name: 'LOTTERY_RESULTS',
+    label: '开奖结果',
+    icon: 'fa fa-info-circle',
+    component: () => import('pages/LotteryResults')
+  },
+  {
     path: 'history',
     label: '历程记录',
     icon: 'fa fa-history',

@@ -30,6 +30,9 @@ export default class API {
       category: new (require('./Request/Lottery/Category').default)(),
       setting: new (require('./Request/Lottery/Setting').default)()
     }
+    this.lotteryResults = {
+      results: new (require('./Request/LotteryResults').default)()
+    }
   }
 
   static get hosts () {
