@@ -6,7 +6,7 @@
       v-if="item.icon"
       v-model="data.nodes"
       :title="item.label"
-      class-name="item.icon"
+      :class-name="item.icon"
       :values="getAllSubNodeID(
         nameNodeList
       )"
