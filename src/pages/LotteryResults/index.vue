@@ -99,7 +99,15 @@
               <tbody>
                 <tr v-for="(data, index) in datas" :key="index">
                   <td>{{ startIndex + index }}</td>
-                  <td>{{ data.game.name }}</td>
+                  <td>
+                    <span
+                      v-for="(t, i) in data.game.classified"
+                      :key="i"
+                    >
+                      <span v-if="i !== 0">,</span>
+                      {{ t.name }}
+                    </span>
+                  </td>
                   <td>{{ data.game.name }}</td>
                   <td>{{ data.period }}</td>
                   <td>{{ data.draw_time }}</td>

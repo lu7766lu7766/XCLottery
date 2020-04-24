@@ -1,6 +1,14 @@
 <template>
   <detail title="编辑" @submit="doSubmit()">
     <div class="form-group row m-b-15">
+      <label class="col-md-2 col-form-label required">分类</label>
+      <div v-if="data.game" class="col-md-10">
+        <validate rules="required">
+          <input v-model="data.classifiedList" :disabled="true" type="text" class="form-control">
+        </validate>
+      </div>
+    </div>
+    <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label required">彩种</label>
       <div v-if="data.game" class="col-md-10">
         <validate rules="required">
@@ -50,6 +58,7 @@ export default {
   mounted () {
     this.$bus.on('update.show', (data) => {
       this.data = _.cloneDeep(data)
+      this.data.classifiedList = data.game.classified.map(x => x.name).join()
       this.data.winning_numbers = this.data.winning_numbers.join()
       this.show()
     })
