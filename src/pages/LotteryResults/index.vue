@@ -45,7 +45,7 @@
                   v-model="search.lottery_id"
                   :datas="options.lottery_game"
                   value-key="id"
-                  title="游戏"
+                  title="彩种"
                 />
               </div>
               <div class="form-group width-100 m-r-10">
@@ -74,6 +74,7 @@
                   <th class="width-30">
                     #
                   </th>
+                  <th>分类</th>
                   <th>彩种</th>
                   <th class="width-200">
                     期数
@@ -98,6 +99,7 @@
               <tbody>
                 <tr v-for="(data, index) in datas" :key="index">
                   <td>{{ startIndex + index }}</td>
+                  <td>{{ data.game.name }}</td>
                   <td>{{ data.game.name }}</td>
                   <td>{{ data.period }}</td>
                   <td>{{ data.draw_time }}</td>

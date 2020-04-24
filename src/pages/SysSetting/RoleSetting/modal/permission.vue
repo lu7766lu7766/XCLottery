@@ -616,6 +616,42 @@
         <!-- limit-sub end -->
       </li>
 
+      <!-- 彩种管理' -->
+      <li v-if="inAllNodes(Menu.LOTTERY_CATEGORY, Menu.LOTTERY_MG)">
+        <permission-node
+          v-model="data.nodes"
+          title="彩种管理"
+          class-name="fas fa-gem"
+          :values="getAllSubNodeID([
+            findNode(Menu.LOTTERY_CATEGORY),
+            findNode(Menu.LOTTERY_MG),
+          ])"
+        />
+
+        <ul class="limit-sub">
+          <permission-tree v-model="data.nodes" :node="findNode(Menu.LOTTERY_CATEGORY)" />
+          <permission-tree v-model="data.nodes" :node="findNode(Menu.LOTTERY_MG)" />
+        </ul>
+        <!-- limit-sub end -->
+      </li>
+
+      <!-- 开奖结果' -->
+      <li v-if="inAllNodes(Menu.LOTTERY_RESULTS)">
+        <permission-node
+          v-model="data.nodes"
+          title="开奖结果"
+          class-name="fa fa-info-circle"
+          :values="getAllSubNodeID([
+            findNode(Menu.LOTTERY_RESULTS),
+          ])"
+        />
+
+        <ul class="limit-sub">
+          <permission-tree v-model="data.nodes" :node="findNode(Menu.LOTTERY_RESULTS)" />
+        </ul>
+        <!-- limit-sub end -->
+      </li>
+
       <!-- 历程记录' -->
       <li v-if="inAllNodes(Menu.ACCOUNT_LOGIN_HISTORY)">
         <permission-node
