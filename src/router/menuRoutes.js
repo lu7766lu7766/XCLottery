@@ -44,7 +44,7 @@ export default [
           },
           {
             path: 'manage',
-            name: 'NEWS_MG', // NEWS_MG
+            name: 'NEWS_MG',
             label: '新闻管理',
             component: () => import('pages/SiteManage/News/Manage')
           }
