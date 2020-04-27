@@ -60,15 +60,6 @@ export default {
       this.nameNodeList = nameNodeList
       return result
     },
-    async getAllNodes () {
-      const res = await this.$thisApi.getAllNodes()
-
-      this.thisoptions.Nodes.All = res.data
-    },
-    async getOwnNodes (id) {
-      const res = await this.$thisApi.getOwnNodes({ id })
-      this.thisoptions.Nodes.Own = res.data
-    },
     inAllNodes (...codes) {
       for (const code of codes) {
         if (_.some(this.thisoptions.Nodes.All, { code })) {

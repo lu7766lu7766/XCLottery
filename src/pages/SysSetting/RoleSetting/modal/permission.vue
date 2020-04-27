@@ -63,17 +63,6 @@ export default {
       const res = await this.$thisApi.getOwnNodes({ id })
       this.thisOptions.Nodes.Own = res.data
     },
-    inAllNodes (...codes) {
-      for (const code of codes) {
-        if (_.some(this.thisOptions.Nodes.All, { code })) {
-          return true
-        }
-      }
-      return false
-    },
-    findNode (code) {
-      return _.find(this.thisOptions.Nodes.All, { code })
-    },
     getAllSubNodeID: JacLib.getAllSubNodeID,
     async doSubmit () {
       await this.$thisApi.doBind(this.data)
