@@ -8,7 +8,7 @@
 		"prefix": "api"
 	},
 	"stable": {
-		"host": "",
+		"host": "8jincai.com",
 		"prefix": "api"
 	}
 }
