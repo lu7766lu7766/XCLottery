@@ -79,6 +79,12 @@ export default {
         this.btnIcon = this.iBtnIcon || 'fa-edit'
         this.hasPermission = this.canUpdate
         break
+      case 'rule':
+        this.name = this.iName || '规则'
+        this.btnColor = this.iBtnColor || 'btn-green'
+        this.btnIcon = this.iBtnIcon || 'fa-list-alt'
+        this.hasPermission = this.canUpdate
+        break
       case 'delete':
         this.name = this.iName || '删除'
         this.btnColor = this.iBtnColor || 'btn-danger'

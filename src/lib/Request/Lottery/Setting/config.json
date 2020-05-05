@@ -18,5 +18,13 @@
   "delete": {
     "uri": "del",
     "method": "delete"
+  },
+  "updateRule": {
+    "uri": "update_rule",
+    "method": "post"
+  },
+  "uploadPic": {
+    "uri": "image/upload",
+    "method": "post"
   }
 }

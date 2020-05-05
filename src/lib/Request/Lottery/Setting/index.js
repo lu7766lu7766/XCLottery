@@ -30,4 +30,12 @@ export default class Request extends BaseRequest {
   async doDelete (data, options) {
     return await this.request('delete', data, options)
   }
+
+  async doUpdateRule (data, options) {
+    return await this.request('updateRule', data, options)
+  }
+
+  async doUploadPic (data, options) {
+    return await this.request('uploadPic', data, options)
+  }
 }

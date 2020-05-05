@@ -64,10 +64,12 @@
                   <th class="width-30">
                     #
                   </th>
-                  <th class="width-200">
+                  <th class="width-20">
                     图示
                   </th>
-                  <th>分类</th>
+                  <th class="width-250">
+                    分类
+                  </th>
                   <th>彩种名称</th>
                   <th class="width-100">
                     状态
@@ -75,7 +77,7 @@
                   <th class="width-150">
                     建立时间
                   </th>
-                  <th class="width-70">
+                  <th class="width-100">
                     操作
                   </th>
                 </tr>
@@ -104,6 +106,7 @@
                   </td>
                   <td>{{ data.created_at }}</td>
                   <td class="text-center">
+                    <j-button type="rule" :action="true" @click="$bus.emit('ruleUpdate.show', data)" />
                     <j-button type="edit" :action="true" @click="$bus.emit('update.show', data)" />
                     <j-button type="delete" :action="true" @click="doDelete(data.id)" />
                   </td>
@@ -119,6 +122,7 @@
       </div>
     </div>
     <update />
+    <ruleUpdate />
   </div>
 </template>
 
@@ -129,7 +133,8 @@ import ImageMixins from 'mixins/Image'
 
 export default {
   components: {
-    update: require('./modal/update').default
+    update: require('./modal/update').default,
+    ruleUpdate: require('./modal/ruleUpdate').default
   },
   mixins: [ListMixins, ImageMixins],
   data: () => ({
