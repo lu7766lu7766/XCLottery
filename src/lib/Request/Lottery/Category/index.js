@@ -27,6 +27,10 @@ export default class Request extends BaseRequest {
     return await this.request('update', data, options)
   }
 
+  async doUpdateSequence (data, options) {
+    return await this.request('updateSequence', data, options)
+  }
+
   async doDelete (data, options) {
     return await this.request('delete', data, options)
   }

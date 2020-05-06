@@ -15,6 +15,10 @@
     "uri": "update",
     "method": "post"
   },
+  "updateSequence": {
+    "uri": "update_sequence",
+    "method": "post"
+  },
   "delete": {
     "uri": "del",
     "method": "delete"

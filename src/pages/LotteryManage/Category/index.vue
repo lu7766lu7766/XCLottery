@@ -71,7 +71,11 @@
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <draggable
+                v-model="datas"
+                element="tbody"
+                @end="onEnd"
+              >
                 <tr v-for="(data, index) in datas" :key="index">
                   <td>{{ startIndex + index }}</td>
                   <td class="text-left">
@@ -87,7 +91,7 @@
                     <j-button type="delete" :action="true" @click="doDelete(data.id)" />
                   </td>
                 </tr>
-              </tbody>
+              </draggable>
             </table>
           </div>
           <!-- end table-responsive -->
@@ -104,10 +108,12 @@
 
 <script>
 import EnableConstant from 'constants/Enable'
+import draggable from 'vuedraggable'
 import ListMixins from 'mixins/List'
 
 export default {
   components: {
+    draggable,
     create: require('./modal/create').default,
     update: require('./modal/update').default
   },
@@ -132,7 +138,12 @@ export default {
       const res = await this.$thisApi.getOptions()
       this.options = res.data
     },
-    getTotal () {}
+    getTotal () {},
+    async onEnd () {
+      const sequence = {}
+      this.datas.forEach((x, i) => { sequence[x.id] = i + 1 })
+      await this.$thisApi.doUpdateSequence({ sequence })
+    }
   }
 }
 </script>
