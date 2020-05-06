@@ -27,6 +27,13 @@
     </div>
 
     <div class="form-group row m-b-15">
+      <label class="col-md-2 col-form-label">描述</label>
+      <div class="col-md-10">
+        <input v-model="data.description" type="text" class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group row m-b-15">
       <label class="col-md-2 col-form-label">图示 </label>
       <div class="col-md-10">
         <validate
